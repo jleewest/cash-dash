@@ -27,13 +27,13 @@ const Category = sequelize.define('category', {
 Transaction.belongsTo(Category);
 Category.hasMany(Transaction);
 
-async function sync() {
+(async () => {
   try {
     await sequelize.sync();
     console.log('All models were synchronized successfully.');
   } catch (error) {
     console.log(error);
   }
-}
+})();
 
-module.exports = { Transaction, Category, sync };
+module.exports = { Transaction, Category };
