@@ -1,10 +1,10 @@
 'use strict';
-
-const { Sequelize } = require('./sequelize');
+const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('cash_dash', 'goran', '', {
   host: 'localhost',
   dialect: 'postgres',
+  logging: false,
 });
 
 (async () => {
