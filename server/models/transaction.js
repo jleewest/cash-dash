@@ -5,22 +5,23 @@ const { DataTypes } = require('sequelize');
 const Transaction = sequelize.define('transaction', {
   date: {
     type: DataTypes.DATE,
-    allowNull: false,
+    // allowNull: false,
   },
   amount: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    // allowNull: false,
   },
   note: {
     type: DataTypes.STRING,
-    allowNull: false,
+    // allowNull: false,
   },
 });
 
 const Category = sequelize.define('category', {
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    // unique: true,
+    // allowNull: false,
   },
 });
 
@@ -29,7 +30,7 @@ Category.hasMany(Transaction);
 
 (async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ alter: true });
     console.log('All models were synchronized successfully.');
   } catch (error) {
     console.log(error);
