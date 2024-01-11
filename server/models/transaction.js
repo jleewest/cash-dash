@@ -2,26 +2,27 @@
 const sequelize = require('./index');
 const { DataTypes } = require('sequelize');
 
-const Transaction = sequelize.define('transaction', {
-  date: {
-    type: DataTypes.DATE,
-    // allowNull: false,
+const Transaction = sequelize.define(
+  'transaction',
+  {
+    date: {
+      type: DataTypes.DATEONLY,
+    },
+    amount: {
+      type: DataTypes.INTEGER,
+    },
+    note: {
+      type: DataTypes.STRING,
+    },
   },
-  amount: {
-    type: DataTypes.INTEGER,
-    // allowNull: false,
-  },
-  note: {
-    type: DataTypes.STRING,
-    // allowNull: false,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
 const Category = sequelize.define('category', {
   name: {
     type: DataTypes.STRING,
-    // unique: true,
-    // allowNull: false,
   },
 });
 
