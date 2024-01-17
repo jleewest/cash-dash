@@ -1,6 +1,9 @@
 'use strict';
-const { Transaction, Category } = require('../models/transaction');
+const Transaction = require('../models/transaction');
 
+// Todo: backend validation
+
+// Get all transactions
 async function getAllTransactions(req, res) {
   try {
     const transactions = await Transaction.findAll();
@@ -12,6 +15,7 @@ async function getAllTransactions(req, res) {
   }
 }
 
+// Create a transaction
 async function createTransaction(req, res) {
   try {
     const transaction = await Transaction.create(req.body);
@@ -23,6 +27,7 @@ async function createTransaction(req, res) {
   }
 }
 
+// Update a transaction
 async function updateTransaction(req, res) {
   try {
     const { id } = req.params;
@@ -40,6 +45,7 @@ async function updateTransaction(req, res) {
   }
 }
 
+// Delete a transaction
 async function deleteTransaction(req, res) {
   try {
     const { id } = req.params;
@@ -56,68 +62,9 @@ async function deleteTransaction(req, res) {
   }
 }
 
-async function getAllCategories(req, res) {
-  try {
-    const transactions = await Category.findAll();
-    res.status(200);
-    res.send(transactions);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-  }
-}
-
-async function createCategory(req, res) {
-  try {
-    const category = await Category.create(req.body);
-    res.status(201);
-    res.send(category);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-  }
-}
-
-async function updateCategory(req, res) {
-  try {
-    const { id } = req.params;
-    const category = await Category.findByPk(id);
-    if (!category) {
-      res.status(400).end();
-      return;
-    }
-    await category.update(req.body);
-    res.status(200);
-    res.send(category);
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-  }
-}
-
-async function deleteCategory(req, res) {
-  try {
-    const { id } = req.params;
-    const category = await Category.findByPk(id);
-    if (!category) {
-      res.status(400).end();
-      return;
-    }
-    await Category.destroy({ where: { id } });
-    res.status(204).end();
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-  }
-}
-
 module.exports = {
   getAllTransactions,
   createTransaction,
   updateTransaction,
   deleteTransaction,
-  getAllCategories,
-  createCategory,
-  updateCategory,
-  deleteCategory,
 };

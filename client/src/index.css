@@ -1,36 +1,7 @@
-:root {
-  /* colors */
-  --color-primary: #030410;
-  --color-secondary: #f4f6dd;
-  --color-tertiary: #a5f2b2;
-  --color-action: #ff9c7c;
-  --color-test: #f4829d;
-  --gradient: linear-gradient(
-    180deg,
-    var(--color-action) 0%,
-    var(--color-test) 100%
-  );
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
 
-  /* fonts */
-  --sans: font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-  /* font-scale */
-  --base-size: 1.2rem;
-  --scale: 1.25;
-  --h1: calc(var(--h2) * var(--scale));
-  --h2: calc(var(--h3) * var(--scale));
-  --h3: calc(var(--h4) * var(--scale));
-  --h4: calc(var(--h5) * var(--scale));
-  --h5: calc(var(--h6) * var(--scale));
-  --h6: var(--base-size);
-
-  /* other variables */
-  --radius: 8px;
-}
-
-html {
-  box-sizing: border-box;
-}
+/* Todo: Refactor all CSS stylings */
 
 *,
 *:before,
@@ -38,13 +9,24 @@ html {
   box-sizing: inherit;
 }
 
+#root {
+  font-family: Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 body {
   font-family: var(--sans);
+  box-sizing: border-box;
   line-height: 1.5;
-  background-color: var(--color-primary);
-  /* background: var(--gradient) no-repeat fixed; */
-  color: var(--color-secondary);
-  font-size: var(--base-size);
-  padding: 4rem;
+  padding: 0;
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./assets/bg.png) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+li {
+  list-style: none;
 }

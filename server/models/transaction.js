@@ -8,10 +8,17 @@ const Transaction = sequelize.define(
     date: {
       type: DataTypes.DATEONLY,
     },
+    category: {
+      type: DataTypes.STRING,
+    },
+    // Stored in cents
     amount: {
       type: DataTypes.INTEGER,
     },
     note: {
+      type: DataTypes.STRING,
+    },
+    type: {
       type: DataTypes.STRING,
     },
   },
@@ -19,15 +26,6 @@ const Transaction = sequelize.define(
     timestamps: false,
   }
 );
-
-const Category = sequelize.define('category', {
-  name: {
-    type: DataTypes.STRING,
-  },
-});
-
-Transaction.belongsTo(Category);
-Category.hasMany(Transaction);
 
 (async () => {
   try {
@@ -38,4 +36,4 @@ Category.hasMany(Transaction);
   }
 })();
 
-module.exports = { Transaction, Category };
+module.exports = Transaction;
