@@ -48,11 +48,12 @@ Let's dive into the colorful world of CashDash! 🌈
 
 ## Installation:
 
-1.  in "/" folder and "/client" folder:
+1.  Make sure to have your postgreSQL db running
+2.  in "/" folder and "/client" folder:
 
     - `npm i `
-
-2.  Make sure to have your postgreSQL db running
+    - `nodemon index.js` in /server
+    - `npm run dev` in /client
 
 ## Database structure:
 
