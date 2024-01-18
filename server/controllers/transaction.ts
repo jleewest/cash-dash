@@ -1,34 +1,35 @@
 'use strict';
-const Transaction = require('../models/transaction');
+import { Request, Response } from 'express';
+import Transaction from '../models/transaction';
 
 // Todo: backend validation
 
 // Get all transactions
-async function getAllTransactions(req, res) {
+export async function getAllTransactions(req: Request, res: Response): Promise<void> {
   try {
     const transactions = await Transaction.findAll();
     res.status(200);
     res.send(transactions);
   } catch (error) {
-    console.log(error);
-    res.status(500);
+    console.error(error);
+    res.status(500).send(error.message);
   }
 }
 
 // Create a transaction
-async function createTransaction(req, res) {
+export async function createTransaction(req: Request, res: Response): Promise<void> {
   try {
     const transaction = await Transaction.create(req.body);
     res.status(201);
     res.send(transaction);
   } catch (error) {
-    console.log(error);
-    res.status(500);
+    console.error(error);
+    res.status(500).send(error.message);
   }
 }
 
 // Update a transaction
-async function updateTransaction(req, res) {
+export async function updateTransaction(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     const transaction = await Transaction.findByPk(id);
@@ -40,13 +41,13 @@ async function updateTransaction(req, res) {
     res.status(200);
     res.send(transaction);
   } catch (error) {
-    console.log(error);
-    res.status(500);
+    console.error(error);
+    res.status(500).send(error.message);
   }
 }
 
 // Delete a transaction
-async function deleteTransaction(req, res) {
+export async function deleteTransaction(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     const transaction = await Transaction.findByPk(id);
@@ -57,14 +58,8 @@ async function deleteTransaction(req, res) {
     await Transaction.destroy({ where: { id } });
     res.status(204).end();
   } catch (error) {
-    console.log(error);
-    res.status(500);
+    console.error(error);
+    res.status(500).send(error.message);
   }
 }
 
-module.exports = {
-  getAllTransactions,
-  createTransaction,
-  updateTransaction,
-  deleteTransaction,
-};
