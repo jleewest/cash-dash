@@ -1,18 +1,27 @@
 import { Line } from 'react-chartjs-2';
 
 // Todo: put all transaction filtering logic in separate file
+//type Props = {
+//  transactionsByYear:
+//}
 
+//@ts-ignore
 const LineChart = ({ transactionsByYear }) => {
+  //console.log(transactionsByYear[0]);
   // Split transactions into income and expenses
   const incomeTransactions = transactionsByYear.filter(
+    //@ts-ignore
     (transaction) => transaction.type === 'income'
   );
   const expensesTransactions = transactionsByYear.filter(
+    //@ts-ignore
     (transaction) => transaction.type === 'expense'
   );
 
   // Group transactions by month and calculate total income and expenses
+  //@ts-ignore
   const groupByMonth = (transactions) => {
+    //@ts-ignore
     return transactions.reduce((acc, transaction) => {
       const month = new Date(transaction.date).getMonth();
       if (!acc[month]) acc[month] = 0;
@@ -31,6 +40,7 @@ const LineChart = ({ transactionsByYear }) => {
       ...Object.keys(incomeGrouped),
       ...Object.keys(expensesGrouped),
     ]),
+    //@ts-ignore
   ].sort((a, b) => a - b);
 
   // Create labels and data for income and expenses
@@ -42,6 +52,7 @@ const LineChart = ({ transactionsByYear }) => {
   );
 
   return (
+    //@ts-ignore
     <Line
       data={{
         labels,

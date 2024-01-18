@@ -43,18 +43,18 @@ const Dashboard = () => {
     <>
       {/* Header: date and year selection */}
       <Flex
-        className="dashboard-header"
+        className='dashboard-header'
         mb={2}
-        justifyContent="space-between"
-        align="center"
+        justifyContent='space-between'
+        align='center'
       >
         {/* Date */}
         <Text
-          fontSize="2xl"
+          fontSize='2xl'
           fontWeight={700}
           mb={2}
-          background="none"
-          color="#0902ff80"
+          background='none'
+          color='#0902ff80'
         >
           {new Date().toLocaleString('en-US', {
             weekday: 'long',
@@ -64,24 +64,24 @@ const Dashboard = () => {
         </Text>
         {/* Year selection */}
         <Select
-          defaultValue="2024"
+          defaultValue='2024'
           w={90}
           onChange={(e) => setSelectedYear(e.target.value)}
-          bg="#0902ff90"
+          bg='#0902ff90'
           border={'none'}
           fontWeight={700}
-          color="white"
+          color='white'
           borderRadius={16}
           _hover={{ bg: '#ffffff70', color: '#0902ff90' }}
         >
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
+          <option value='2024'>2024</option>
+          <option value='2023'>2023</option>
         </Select>
       </Flex>
 
-      <div className="dashboard">
+      <div className='dashboard'>
         {/* Total balance card */}
-        <Stat className="stat">
+        <Stat className='stat'>
           <StatLabel>Total Balance</StatLabel>
           <StatNumber>
             {transactionsByYear
@@ -90,12 +90,12 @@ const Dashboard = () => {
             €
           </StatNumber>
           <StatHelpText>
-            <StatArrow type="increase" />
+            <StatArrow type='increase' />
             23.36%
           </StatHelpText>
         </Stat>
 
-        <Stat className="stat">
+        <Stat className='stat'>
           {/* Total income card */}
           <StatLabel>Total Income</StatLabel>
           <StatNumber>
@@ -105,12 +105,12 @@ const Dashboard = () => {
               .toFixed(2)}
           </StatNumber>
           <StatHelpText>
-            <StatArrow type="decrease" />
+            <StatArrow type='decrease' />
             9.05%
           </StatHelpText>
         </Stat>
 
-        <Stat className="stat">
+        <Stat className='stat'>
           {/* Total expenses card */}
           <StatLabel>Total Expenses</StatLabel>
           <StatNumber>
@@ -120,22 +120,22 @@ const Dashboard = () => {
               .toFixed(2)}
           </StatNumber>
           <StatHelpText>
-            <StatArrow type="increase" />
+            <StatArrow type='increase' />
             5.87%
           </StatHelpText>
         </Stat>
 
         {/* Charts: pass transactions based on selected year*/}
-        <div className="doughnut-chart">
+        <div className='doughnut-chart'>
           <DoughnutChart transactionsByYear={transactionsByYear} />
         </div>
-        <div className="bar-chart">
+        <div className='bar-chart'>
           <BarChart transactionsByYear={transactionsByYear} />
         </div>
-        <div className="line-chart">
+        <div className='line-chart'>
           <LineChart transactionsByYear={transactionsByYear} />
         </div>
-        <div className="recent-transactions">
+        <div className='recent-transactions'>
           <DashboardRecentTransactions transactions={transactions} />
         </div>
       </div>
