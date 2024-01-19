@@ -5,14 +5,13 @@ import Transactions from './components/Transactions.tsx';
 import Header from './components/Header.tsx';
 import Dashboard from './components/Dashboard.tsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { TransactionsContext } from './transaction.tsx';
+export { TransactionsContext };
 
 // Todo: API requests all in separate file
 // Todo: implement error catching for all APIs
 
 // TransactionsContext is used to pass transactions throughout the app
-//@ts-ignore
-export const TransactionsContext = React.createContext();
-
 function App() {
   const [transactions, setTransactions] = useState([]);
 

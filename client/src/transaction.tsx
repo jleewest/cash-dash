@@ -1,4 +1,4 @@
-import { useContext, createContext } from 'react';
+import { useContext, createContext, Dispatch, SetStateAction } from 'react';
 
 export class Transaction {
   'amount': number;
@@ -11,6 +11,7 @@ export class Transaction {
 
 export type TTransactionContext = {
   transactions: Transaction[];
+  setTransactions: Dispatch<SetStateAction<never[]>>;
 };
 
 export const TransactionsContext = createContext<TTransactionContext | null>(
