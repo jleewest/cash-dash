@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import NavBar from './components/NavBar.jsx';
 import Transactions from './components/Transactions.tsx';
-import Header from './components/Header.jsx';
+import Header from './components/Header.tsx';
 import Dashboard from './components/Dashboard.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
