@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import sequelize from '.';
 
 //define attributes for better type checking
-interface TransactionAttributes {
+export interface TransactionAttributes {
   id?: number;
   date: string;
   category: string;
