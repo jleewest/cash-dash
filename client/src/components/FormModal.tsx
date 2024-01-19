@@ -21,8 +21,10 @@ import {
 // Todo: move all api calls to separate file
 // Todo: ability to add, edit, remove categories
 
+//@ts-ignore
 function FormModal({ isOpen, onClose, selectedTransaction }) {
   // Context
+  //@ts-ignore
   const { setTransactions } = useContext(TransactionsContext);
   // States
   const [date, setDate] = useState('');
@@ -54,24 +56,29 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
   }, [selectedTransaction]);
 
   // Form field change handling
+  //@ts-ignore
   function handleDateChange(e) {
     setDate(e.target.value);
   }
 
+  //@ts-ignore
   function handleCategoryChange(e) {
     setCategory(e.target.value);
   }
 
+  //@ts-ignore
   function handleAmountChange(e) {
     const amount = e.target.value;
     setAmount(amount);
   }
 
+  //@ts-ignore
   function handleNoteChange(e) {
     setNote(e.target.value);
   }
 
   // Form submission handling
+  //@ts-ignore
   async function handleSubmit(e) {
     e.preventDefault();
     console.log('date', date);
@@ -132,8 +139,10 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
     // Update transactions state
     const updatedTransaction = await response.json();
     updatedTransaction.amount = updatedTransaction.amount / 100;
+    //@ts-ignore
     setTransactions((oldTransactions) => {
       if (selectedTransaction) {
+        //@ts-ignore
         return oldTransactions.map((transaction) =>
           transaction.id === selectedTransaction.id
             ? updatedTransaction
@@ -159,7 +168,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
         <ModalOverlay />
         <ModalContent borderRadius={16}>
           <ModalHeader>
@@ -169,68 +178,69 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
           <ModalBody>
             <FormControl onSubmit={handleSubmit}>
               {/* Expense vs. Income switch */}
-              <FormControl display="flex" justifyContent="center">
-                <FormLabel htmlFor="type" mb="0">
+              <FormControl display='flex' justifyContent='center'>
+                <FormLabel htmlFor='type' mb='0'>
                   Expense
                 </FormLabel>
                 <Switch
-                  id="type"
-                  colorScheme="green"
+                  id='type'
+                  colorScheme='green'
                   onChange={() => setIsExpense(!isExpense)}
                   isChecked={!isExpense}
                 />
-                <FormLabel htmlFor="type" mx="3">
+                <FormLabel htmlFor='type' mx='3'>
                   Income
                 </FormLabel>
               </FormControl>
 
               {/* Date picker */}
               <FormControl isRequired>
-                <FormLabel htmlFor="date">Date:</FormLabel>
+                <FormLabel htmlFor='date'>Date:</FormLabel>
                 <Input
-                  type="date"
-                  id="date"
+                  type='date'
+                  id='date'
                   value={date}
                   onChange={handleDateChange}
-                  name="date"
-                  mb="6"
+                  name='date'
+                  mb='6'
                   borderRadius={16}
                 />
               </FormControl>
 
               {/* Category Selection */}
               <FormControl isRequired>
-                <FormLabel htmlFor="category">Category:</FormLabel>
+                <FormLabel htmlFor='category'>Category:</FormLabel>
                 <Select
-                  type="text"
-                  id="category"
+                  //@ts-ignore
+                  type='text'
+                  id='category'
                   value={category}
                   onChange={handleCategoryChange}
-                  name="category"
-                  placeholder="Select category"
-                  mb="6"
+                  name='category'
+                  placeholder='Select category'
+                  mb='6'
                   borderRadius={16}
                 >
                   {/* Show different categories based on switch */}
                   {isExpense ? (
                     <>
-                      <option value="Bills">Bills</option>
-                      <option value="Food">Food</option>
-                      <option value="Housing">Housing</option>
-                      <option value="Insurance">Insurance</option>
-                      <option value="Pets">Pets</option>
-                      <option value="Phone&Internet">Food</option>
-                      <option value="Subscriptions">Subscriptions</option>
-                      <option value="Transportation">Transportation</option>
-                      <option value="Utilities">Utilities</option>
-                      <option value="Other">Other</option>
+                      <option value='Bills'>Bills</option>
+                      <option value='Food'>Food</option>
+                      <option value='Housing'>Housing</option>
+                      <option value='Insurance'>Insurance</option>
+                      <option value='Pets'>Pets</option>
+                      <option value='Phone&Internet'>Food</option>
+                      <option value='Subscriptions'>Subscriptions</option>
+                      <option value='Transportation'>Transportation</option>
+                      <option value='Utilities'>Utilities</option>
+                      <option value='Other'>Other</option>
                     </>
                   ) : (
                     <>
-                      <option value="Freelancing">Freelancing</option>
-                      <option value="Rental Income">Dividend Income</option>
-                      <option value="Salary">Salary</option>
-                      <option value="Sale">Sale</option>
+                      <option value='Freelancing'>Freelancing</option>
+                      <option value='Rental Income'>Dividend Income</option>
+                      <option value='Salary'>Salary</option>
+                      <option value='Sale'>Sale</option>
                     </>
                   )}
                 </Select>
@@ -238,28 +248,28 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
 
               {/* Amount input */}
               <FormControl isRequired>
-                <FormLabel htmlFor="amount">Amount:</FormLabel>
+                <FormLabel htmlFor='amount'>Amount:</FormLabel>
                 <Input
-                  type="number"
-                  id="amount"
+                  type='number'
+                  id='amount'
                   value={amount}
                   onChange={handleAmountChange}
-                  name="amount"
-                  mb="6"
+                  name='amount'
+                  mb='6'
                   className={isExpense ? 'red' : 'green'}
                   borderRadius={16}
                 />
               </FormControl>
 
               {/* Note input */}
-              <FormLabel htmlFor="note">Note:</FormLabel>
+              <FormLabel htmlFor='note'>Note:</FormLabel>
               <Input
-                type="text"
-                id="note"
+                type='text'
+                id='note'
                 value={note}
                 onChange={handleNoteChange}
-                name="note"
-                mb="6"
+                name='note'
+                mb='6'
                 borderRadius={16}
               />
             </FormControl>
@@ -271,7 +281,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
               mr={3}
               onClick={onClose}
               borderRadius={16}
-              bg="#00000095"
+              bg='#00000095'
               color={'white'}
               _hover={{
                 backgroundColor: '#00000025',
@@ -283,8 +293,8 @@ function FormModal({ isOpen, onClose, selectedTransaction }) {
 
             {/* Save transaction button */}
             <Button
-              type="submit"
-              bg="#0902ff90"
+              type='submit'
+              bg='#0902ff90'
               _hover={{
                 backgroundColor: '#0902ff30',
                 color: '#0902ff90',

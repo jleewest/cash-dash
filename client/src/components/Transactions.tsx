@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import FormModal from './FormModal.jsx';
+import FormModal from './FormModal.tsx';
 import { TransactionsContext } from '../App.jsx';
 import {
   Button,
