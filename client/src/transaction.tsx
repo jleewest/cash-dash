@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext, createContext } from 'react';
 
 export class Transaction {
   'amount': number;
@@ -9,9 +9,16 @@ export class Transaction {
   'type': string;
 }
 
-export type TransactionContext = {
+export type TTransactionContext = {
   transactions: Transaction[];
 };
 
-export const TransactionsContext =
-  React.createContext<TransactionContext | null>(null);
+export const TransactionsContext = createContext<TTransactionContext | null>(
+  null
+);
+
+export const useTransactionContext = () => {
+  const context = useContext(TransactionsContext);
+  if (!context) throw Error('TransactionContext not provided');
+  return context;
+};
