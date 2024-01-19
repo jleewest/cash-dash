@@ -1,16 +1,25 @@
 import { Doughnut } from 'react-chartjs-2';
+import { Transaction } from './ChartUtil';
 
 // Todo: put all transaction filtering logic in separate file
+type DoughnutChartProps = {
+  transactionsByYear: Transaction[];
+};
 
-const DoughnutChart = ({ transactionsByYear }) => {
+const DoughnutChart: React.FC<DoughnutChartProps> = ({
+  transactionsByYear,
+}) => {
   // Group transactions by category and calculate total expenses
-  const groupedTransactions = transactionsByYear.reduce((acc, transaction) => {
-    if (transaction.type === 'expense') {
-      acc[transaction.category] =
-        (acc[transaction.category] || 0) + Math.abs(transaction.amount);
-    }
-    return acc;
-  }, {});
+  const groupedTransactions = transactionsByYear.reduce(
+    (acc, transaction) => {
+      if (transaction.type === 'expense') {
+        acc[transaction.category] =
+          (acc[transaction.category] || 0) + Math.abs(transaction.amount);
+      }
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   // Sort categories by total expenses
   const sortedCategories = Object.entries(groupedTransactions).sort(

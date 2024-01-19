@@ -9,38 +9,38 @@ import user from '../assets/user.jpg';
 const NavBar = () => {
   return (
     <>
-    {/* Nav bar */}
-      <div className="navbar">
+      {/* Nav bar */}
+      <div className='navbar'>
         <nav>
           <ul>
             <li>
-              <Link to={`/`} className="link">
-                <FontAwesomeIcon icon={faHouse} className="icon" />
+              <Link to={`/`} className='link'>
+                <FontAwesomeIcon icon={faHouse} className='icon' />
                 Dashboard
               </Link>
             </li>
             <li>
-              <Link to={`/transactions`} className="link">
-                <FontAwesomeIcon icon={faTableList} className="icon" />
+              <Link to={`/transactions`} className='link'>
+                <FontAwesomeIcon icon={faTableList} className='icon' />
                 Transactions
               </Link>
             </li>
           </ul>
         </nav>
         {/* User details */}
-        <div className="user">
+        <div className='user'>
           <Avatar
-            name="John Doe"
+            name='John Doe'
             src={user}
-            size="lg"
+            size='lg'
             boxShadow={'0 0 10px rgba(0, 0, 0, 0.5)'}
           />
-          <div className="user-details">
+          <div className='user-details'>
             <h3>John Doe</h3>
             <p>john.doe@cashdash.com</p>
           </div>
-          <div className="signout">
-            <FontAwesomeIcon icon={faArrowRightFromBracket} className="icon" />
+          <div className='signout'>
+            <FontAwesomeIcon icon={faArrowRightFromBracket} className='icon' />
             Sign out
           </div>
         </div>

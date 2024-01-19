@@ -6,13 +6,13 @@ const Header = () => {
   return (
     <header>
       {/* Logo */}
-      <div className="logo-bg">
-        <img src={logo} alt="logo" width={160} className="logo" />
+      <div className='logo-bg'>
+        <img src={logo} alt='logo' width={160} className='logo' />
       </div>
       {/* App name */}
-      <Heading as="h1" lineHeight="tall" mt={2} size="xl">
+      <Heading as='h1' lineHeight='tall' mt={2} size='xl'>
         <Highlight
-          query="Cash"
+          query='Cash'
           styles={{
             px: '2',
             py: '1',

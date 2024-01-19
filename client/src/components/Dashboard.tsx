@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { TransactionsContext } from '../App.jsx';
+import { TransactionsContext } from '../App.tsx';
 import { defaults } from 'chart.js/auto';
 import {
   Stat,
@@ -9,14 +9,15 @@ import {
   StatArrow,
   Text,
 } from '@chakra-ui/react';
-import BarChart from './Dashboard/BarChart.jsx';
-import DoughnutChart from './Dashboard/DoughnutChart.jsx';
-import LineChart from './Dashboard/LineChart.jsx';
+import BarChart from './Dashboard/BarChart.tsx';
+import DoughnutChart from './Dashboard/DoughnutChart.tsx';
+import LineChart from './Dashboard/LineChart.tsx';
 import { Flex, Select } from '@chakra-ui/react';
-import DashboardRecentTransactions from './DashboardRecentTransactions.jsx';
+import DashboardRecentTransactions from './DashboardRecentTransactions.tsx';
 
 defaults.responsive = true;
 defaults.plugins.title.display = true;
+///@ts-ignore
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = 'black';
 
@@ -29,32 +30,33 @@ defaults.plugins.title.color = 'black';
 
 const Dashboard = () => {
   // Context
+  //@ts-ignore
   const { transactions } = useContext(TransactionsContext);
   // State
   const [selectedYear, setSelectedYear] = useState('2024');
 
   // Filter transactions by year to pass to charts
   const transactionsByYear = transactions.filter(
+    //@ts-ignore
     (transaction) =>
       new Date(transaction.date).getFullYear().toString() === selectedYear
   );
-
   return (
     <>
       {/* Header: date and year selection */}
       <Flex
-        className="dashboard-header"
+        className='dashboard-header'
         mb={2}
-        justifyContent="space-between"
-        align="center"
+        justifyContent='space-between'
+        align='center'
       >
         {/* Date */}
         <Text
-          fontSize="2xl"
+          fontSize='2xl'
           fontWeight={700}
           mb={2}
-          background="none"
-          color="#0902ff80"
+          background='none'
+          color='#0902ff80'
         >
           {new Date().toLocaleString('en-US', {
             weekday: 'long',
@@ -64,78 +66,83 @@ const Dashboard = () => {
         </Text>
         {/* Year selection */}
         <Select
-          defaultValue="2024"
+          defaultValue='2024'
           w={90}
           onChange={(e) => setSelectedYear(e.target.value)}
-          bg="#0902ff90"
+          bg='#0902ff90'
           border={'none'}
           fontWeight={700}
-          color="white"
+          color='white'
           borderRadius={16}
           _hover={{ bg: '#ffffff70', color: '#0902ff90' }}
         >
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
+          <option value='2024'>2024</option>
+          <option value='2023'>2023</option>
         </Select>
       </Flex>
 
-      <div className="dashboard">
+      <div className='dashboard'>
         {/* Total balance card */}
-        <Stat className="stat">
+        <Stat className='stat'>
           <StatLabel>Total Balance</StatLabel>
           <StatNumber>
             {transactionsByYear
+              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
             €
           </StatNumber>
           <StatHelpText>
-            <StatArrow type="increase" />
+            <StatArrow type='increase' />
             23.36%
           </StatHelpText>
         </Stat>
 
-        <Stat className="stat">
+        <Stat className='stat'>
           {/* Total income card */}
           <StatLabel>Total Income</StatLabel>
           <StatNumber>
             {transactionsByYear
+              //@ts-ignore
               .filter((transaction) => transaction.type === 'income')
+              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
           </StatNumber>
           <StatHelpText>
-            <StatArrow type="decrease" />
+            <StatArrow type='decrease' />
             9.05%
           </StatHelpText>
         </Stat>
 
-        <Stat className="stat">
+        <Stat className='stat'>
           {/* Total expenses card */}
           <StatLabel>Total Expenses</StatLabel>
           <StatNumber>
             {transactionsByYear
+              //@ts-ignore
               .filter((transaction) => transaction.type === 'expense')
+              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
           </StatNumber>
           <StatHelpText>
-            <StatArrow type="increase" />
+            <StatArrow type='increase' />
             5.87%
           </StatHelpText>
         </Stat>
 
         {/* Charts: pass transactions based on selected year*/}
-        <div className="doughnut-chart">
+        <div className='doughnut-chart'>
           <DoughnutChart transactionsByYear={transactionsByYear} />
         </div>
-        <div className="bar-chart">
+        <div className='bar-chart'>
           <BarChart transactionsByYear={transactionsByYear} />
         </div>
-        <div className="line-chart">
+        <div className='line-chart'>
           <LineChart transactionsByYear={transactionsByYear} />
         </div>
-        <div className="recent-transactions">
+        <div className='recent-transactions'>
           <DashboardRecentTransactions transactions={transactions} />
         </div>
       </div>

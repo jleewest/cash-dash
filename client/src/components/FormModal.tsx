@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { TransactionsContext } from '../App.jsx';
-import { TransactionAttributes } from '../../../server/models/transaction.js'
+import { TransactionAttributes } from '../../../server/models/transaction.js';
 import {
   Button,
   FormControl,
@@ -28,7 +28,6 @@ interface FormModalProps {
   onClose: () => void;
   selectedTransaction: TransactionAttributes | null;
 }
-
 
 function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Context
@@ -168,77 +167,79 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
         <ModalOverlay />
         <ModalContent borderRadius={16}>
           <ModalHeader>
             {selectedTransaction ? 'Edit Transaction' : 'Add Transaction'}
           </ModalHeader>
           <ModalCloseButton />
-          <form onSubmit={handleSubmit}> {/* Form element with onSubmit handler */}
+          <form onSubmit={handleSubmit}>
+            {' '}
+            {/* Form element with onSubmit handler */}
             <ModalBody>
               {/* Expense vs. Income switch */}
-              <FormControl display="flex" justifyContent="center">
-                <FormLabel htmlFor="type" mb="0">
+              <FormControl display='flex' justifyContent='center'>
+                <FormLabel htmlFor='type' mb='0'>
                   Expense
                 </FormLabel>
                 <Switch
-                  id="type"
-                  colorScheme="green"
+                  id='type'
+                  colorScheme='green'
                   onChange={() => setIsExpense(!isExpense)}
                   isChecked={!isExpense}
                 />
-                <FormLabel htmlFor="type" mx="3">
+                <FormLabel htmlFor='type' mx='3'>
                   Income
                 </FormLabel>
               </FormControl>
 
               {/* Date picker */}
               <FormControl isRequired>
-                <FormLabel htmlFor="date">Date:</FormLabel>
+                <FormLabel htmlFor='date'>Date:</FormLabel>
                 <Input
-                  type="date"
-                  id="date"
+                  type='date'
+                  id='date'
                   value={date}
                   onChange={handleDateChange}
-                  name="date"
-                  mb="6"
+                  name='date'
+                  mb='6'
                   borderRadius={16}
                 />
               </FormControl>
 
               {/* Category Selection */}
               <FormControl isRequired>
-                <FormLabel htmlFor="category">Category:</FormLabel>
+                <FormLabel htmlFor='category'>Category:</FormLabel>
                 <Select
-                  id="category"
+                  id='category'
                   value={category}
                   onChange={handleCategoryChange}
-                  name="category"
-                  placeholder="Select category"
-                  mb="6"
+                  name='category'
+                  placeholder='Select category'
+                  mb='6'
                   borderRadius={16}
                 >
                   {/* Show different categories based on switch */}
                   {isExpense ? (
                     <>
-                      <option value="Bills">Bills</option>
-                      <option value="Food">Food</option>
-                      <option value="Housing">Housing</option>
-                      <option value="Insurance">Insurance</option>
-                      <option value="Pets">Pets</option>
-                      <option value="Phone&Internet">Phone&Internet</option>
-                      <option value="Subscriptions">Subscriptions</option>
-                      <option value="Transportation">Transportation</option>
-                      <option value="Utilities">Utilities</option>
-                      <option value="Other">Other</option>
+                      <option value='Bills'>Bills</option>
+                      <option value='Food'>Food</option>
+                      <option value='Housing'>Housing</option>
+                      <option value='Insurance'>Insurance</option>
+                      <option value='Pets'>Pets</option>
+                      <option value='Phone&Internet'>Phone&Internet</option>
+                      <option value='Subscriptions'>Subscriptions</option>
+                      <option value='Transportation'>Transportation</option>
+                      <option value='Utilities'>Utilities</option>
+                      <option value='Other'>Other</option>
                     </>
                   ) : (
                     <>
-                      <option value="Freelancing">Freelancing</option>
-                      <option value="Rental Income">Rental Income</option>
-                      <option value="Salary">Salary</option>
-                      <option value="Sale">Sale</option>
+                      <option value='Freelancing'>Freelancing</option>
+                      <option value='Rental Income'>Rental Income</option>
+                      <option value='Salary'>Salary</option>
+                      <option value='Sale'>Sale</option>
                     </>
                   )}
                 </Select>
@@ -246,37 +247,36 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
 
               {/* Amount input */}
               <FormControl isRequired>
-                <FormLabel htmlFor="amount">Amount:</FormLabel>
+                <FormLabel htmlFor='amount'>Amount:</FormLabel>
                 <Input
-                  type="number"
-                  id="amount"
+                  type='number'
+                  id='amount'
                   value={amount}
                   onChange={handleAmountChange}
-                  name="amount"
-                  mb="6"
+                  name='amount'
+                  mb='6'
                   borderRadius={16}
                 />
               </FormControl>
 
               {/* Note input */}
-              <FormLabel htmlFor="note">Note:</FormLabel>
+              <FormLabel htmlFor='note'>Note:</FormLabel>
               <Input
-                type="text"
-                id="note"
+                type='text'
+                id='note'
                 value={note}
                 onChange={handleNoteChange}
-                name="note"
-                mb="6"
+                name='note'
+                mb='6'
                 borderRadius={16}
               />
             </ModalBody>
-
             <ModalFooter>
               <Button
                 mr={3}
                 onClick={onClose}
                 borderRadius={16}
-                bg="#00000095"
+                bg='#00000095'
                 color={'white'}
                 _hover={{
                   backgroundColor: '#00000025',
@@ -286,8 +286,8 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                 Cancel
               </Button>
               <Button
-                type="submit"
-                bg="#0902ff90"
+                type='submit'
+                bg='#0902ff90'
                 _hover={{
                   backgroundColor: '#0902ff30',
                   color: '#0902ff90',

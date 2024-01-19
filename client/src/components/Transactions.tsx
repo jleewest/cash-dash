@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import FormModal from './FormModal.jsx';
-import { TransactionsContext } from '../App.jsx';
+import FormModal from './FormModal.tsx';
+import { TransactionsContext } from '../App.tsx';
 import {
   Button,
   Table,
@@ -37,6 +37,7 @@ import {
 
 const Transactions = () => {
   // Context
+  //@ts-ignore
   const { transactions } = useContext(TransactionsContext);
 
   // States
@@ -53,14 +54,17 @@ const Transactions = () => {
   useEffect(() => {
     let result = transactions;
     if (selectedTab === 'Expenses') {
+      //@ts-ignore
       result = result.filter((transaction) => transaction.type === 'expense');
     } else if (selectedTab === 'Income') {
+      //@ts-ignore
       result = result.filter((transaction) => transaction.type === 'income');
     }
 
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
     result = result.filter(
+      //@ts-ignore
       (transaction) =>
         (transaction.date &&
           transaction.date
@@ -79,6 +83,7 @@ const Transactions = () => {
   }, [selectedTab, transactions, searchTerm]);
 
   // Remove transaction
+  //@ts-ignore
   async function handleRemove(transactionId) {
     await fetch(`http://localhost:3000/transactions/${transactionId}`, {
       method: 'DELETE',
@@ -92,6 +97,7 @@ const Transactions = () => {
     });
   }
 
+  //@ts-ignore
   function openModal(transaction) {
     setSelectedTransaction(transaction);
     setShowModal(true);
@@ -102,15 +108,18 @@ const Transactions = () => {
     setShowModal(false);
   }
 
+  //@ts-ignore
   function handleTabClick(tab) {
     setSelectedTab(tab);
   }
 
+  //@ts-ignore
   function handleSearchChange(event) {
     setSearchTerm(event.target.value);
   }
 
   return (
+    //@ts-ignore
     <>
       {/* FormModal component opens with either selected transactions or none */}
       <FormModal
@@ -120,13 +129,13 @@ const Transactions = () => {
       />
 
       {/* Header with date */}
-      <Flex justifyContent="flex-start" width="fit-content" background="none">
+      <Flex justifyContent='flex-start' width='fit-content' background='none'>
         <Text
-          fontSize="2xl"
+          fontSize='2xl'
           fontWeight={700}
           mb={2}
-          background="none"
-          color="#0902ff80"
+          background='none'
+          color='#0902ff80'
         >
           {new Date().toLocaleString('en-US', {
             weekday: 'long',
@@ -137,7 +146,7 @@ const Transactions = () => {
       </Flex>
 
       {/* Tabs: All, Expenses, Income */}
-      <Tabs variant="solid-rounded" colorScheme="gray" isFitted p={2}>
+      <Tabs variant='solid-rounded' colorScheme='gray' isFitted p={2}>
         <TabList>
           <Tab onClick={() => handleTabClick('All')}>All</Tab>
           <Tab onClick={() => handleTabClick('Expenses')}>Expenses</Tab>
@@ -146,13 +155,13 @@ const Transactions = () => {
           {/* Search bar */}
           <InputGroup mx={20} w={300} borderRadius={16}>
             <Input
-              type="text"
+              type='text'
               value={searchTerm}
               onChange={handleSearchChange}
-              placeholder="Search transactions..."
+              placeholder='Search transactions...'
               _placeholder={{ color: '#00000080' }}
               borderRadius={16}
-              borderColor="#0902ff30"
+              borderColor='#0902ff30'
               _hover={{ borderColor: '#0902ff90' }}
             />
             <InputLeftElement>
@@ -163,7 +172,7 @@ const Transactions = () => {
           {/* Add transaction button */}
           <Button
             onClick={() => openModal(null)}
-            bg="#0902ff90"
+            bg='#0902ff90'
             borderRadius={16}
             color={'white'}
             _hover={{
@@ -171,20 +180,20 @@ const Transactions = () => {
               color: '#0902ff90',
             }}
           >
-            <FontAwesomeIcon className="icon white" icon={faPlus} />
+            <FontAwesomeIcon className='icon white' icon={faPlus} />
             Add Transaction
           </Button>
         </TabList>
       </Tabs>
 
       {/* Table with transactions */}
-      <div className="table-container">
+      <div className='table-container'>
         <TableContainer mt={4}>
           <Table
-            variant="striped"
-            colorScheme="gray"
-            size="lg"
-            className="table"
+            variant='striped'
+            colorScheme='gray'
+            size='lg'
+            className='table'
           >
             <Thead>
               <Tr>
@@ -204,11 +213,11 @@ const Transactions = () => {
                   <Td>{transaction.category}</Td>
                   <Td textAlign={'right'}>
                     <Tag
-                      size="lg"
-                      borderRadius="full"
-                      variant="subtle"
-                      className="tag"
-                      color="white"
+                      size='lg'
+                      borderRadius='full'
+                      variant='subtle'
+                      className='tag'
+                      color='white'
                       bg={
                         transaction.type === 'expense' ? '#ff4069' : '#40cfa6'
                       }
@@ -221,10 +230,10 @@ const Transactions = () => {
                   <Td>
                     {/* Edit and delete buttons */}
                     <button onClick={() => openModal(transaction)}>
-                      <FontAwesomeIcon icon={faPenToSquare} className="icon" />
+                      <FontAwesomeIcon icon={faPenToSquare} className='icon' />
                     </button>
                     <button onClick={() => handleRemove(transaction.id)}>
-                      <FontAwesomeIcon icon={faTrash} className="icon" />
+                      <FontAwesomeIcon icon={faTrash} className='icon' />
                     </button>
                   </Td>
                 </Tr>

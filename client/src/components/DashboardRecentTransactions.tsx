@@ -9,16 +9,16 @@ import {
   Tag,
   TagLabel,
 } from '@chakra-ui/react';
-import { useContext } from 'react';
-import { TransactionsContext } from '../App.jsx';
+import { useTransactionContext } from '../transaction.tsx';
 import moment from 'moment';
 
 // Shows the 6 most recent transactions in a table
 const DashboardRecentTransactions = () => {
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactionContext();
+
   return (
     <TableContainer>
-      <Table variant="striped" colorScheme="gray" size="sm" className="table">
+      <Table variant='striped' colorScheme='gray' size='sm' className='table'>
         <caption>Recent Transactions</caption>
         <Thead>
           <Tr>
@@ -34,10 +34,10 @@ const DashboardRecentTransactions = () => {
               <Td>{transaction.category}</Td>
               <Td textAlign={'right'}>
                 <Tag
-                  size="md"
-                  borderRadius="full"
-                  variant="subtle"
-                  color="white"
+                  size='md'
+                  borderRadius='full'
+                  variant='subtle'
+                  color='white'
                   bg={transaction.type === 'expense' ? '#ff4069' : '#40cfa6'}
                 >
                   <TagLabel>{transaction.amount}€</TagLabel>
