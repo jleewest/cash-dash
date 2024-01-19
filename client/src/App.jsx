@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import NavBar from './components/NavBar.jsx';
+import NavBar from './components/NavBar.tsx';
 import Transactions from './components/Transactions.tsx';
 import Header from './components/Header.tsx';
 import Dashboard from './components/Dashboard.jsx';
