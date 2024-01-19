@@ -18,23 +18,23 @@ type Transaction = {
 const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   // Split transactions into income and expenses
   const incomeTransactions = transactionsByYear.filter(
-    (transaction: Transaction) => transaction.type === 'income'
+    (transaction) => transaction.type === 'income'
   );
   const expensesTransactions = transactionsByYear.filter(
-    (transaction: Transaction) => transaction.type === 'expense'
+    (transaction) => transaction.type === 'expense'
   );
 
   // Group transactions by month and calculate total income and expenses
   const groupByMonth = (transactions: Transaction[]) => {
     return transactions.reduce(
-      (acc: Record<number, number>, transaction: Transaction) => {
+      (acc, transaction) => {
         const month = new Date(transaction.date).getMonth();
         if (!acc[month]) acc[month] = 0;
         // Use absolute value of amount
         acc[month] += Math.abs(transaction.amount);
         return acc;
       },
-      {}
+      {} as Record<number, number>
     );
   };
 
