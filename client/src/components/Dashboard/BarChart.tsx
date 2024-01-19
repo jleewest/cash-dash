@@ -1,22 +1,37 @@
 import { Bar } from 'react-chartjs-2';
 
 // Todo: put all transaction filtering logic in separate file
+type LineChartProps = {
+  transactionsByYear: Transaction[];
+};
 
-const LineChart = ({ transactionsByYear }) => {
+type Transaction = {
+  amount: number;
+  category: string;
+  date: string;
+  id: number;
+  note: string;
+  type: string;
+};
+//@ts-ignore
+const BarChart: React.FC<props> = ({ transactionsByYear }) => {
   // Split transactions into income and expenses
   const incomeTransactions = transactionsByYear.filter(
-    (transaction) => transaction.type === 'income'
+    (transaction: Transaction) => transaction.type === 'income'
   );
   const expensesTransactions = transactionsByYear.filter(
-    (transaction) => transaction.type === 'expense'
+    (transaction: Transaction) => transaction.type === 'expense'
   );
 
   // Group transactions by month and calculate total income and expenses
-  const groupByMonth = (transactions) => {
+  const groupByMonth = (transactions: Transaction[]) => {
+    //@ts-ignore
     return transactions.reduce((acc, transaction) => {
       const month = new Date(transaction.date).getMonth();
+      //@ts-ignore
       if (!acc[month]) acc[month] = 0;
       // Use absolute value of amount
+      //@ts-ignore
       acc[month] += Math.abs(transaction.amount);
       return acc;
     }, {});
@@ -31,10 +46,12 @@ const LineChart = ({ transactionsByYear }) => {
       ...Object.keys(incomeGrouped),
       ...Object.keys(expensesGrouped),
     ]),
+    //@ts-ignore
   ].sort((a, b) => a - b);
 
   // Create labels and data for income and expenses
   const labels = sortedMonths.map((month) =>
+    //@ts-ignore
     new Date(2023, month).toLocaleString('default', { month: 'short' })
   );
   const incomeData = sortedMonths.map((month) => incomeGrouped[month] || 0);
@@ -75,4 +92,4 @@ const LineChart = ({ transactionsByYear }) => {
   );
 };
 
-export default LineChart;
+export default BarChart;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import NavBar from './components/NavBar.jsx';
-import Transactions from './components/Transactions.jsx';
+import Transactions from './components/Transactions.tsx';
 import Header from './components/Header.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -34,28 +34,28 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
-        <div className="header-navbar-container">
+      <div className='app'>
+        <div className='header-navbar-container'>
           <Header />
           <NavBar />
         </div>
-        <div className="main">
+        <div className='main'>
           <TransactionsContext.Provider
             value={{ transactions, setTransactions }}
           >
             <Routes>
               <Route
-                path="/"
+                path='/'
                 element={
-                  <div className="dashboard-container">
+                  <div className='dashboard-container'>
                     <Dashboard />
                   </div>
                 }
               />
               <Route
-                path="/transactions"
+                path='/transactions'
                 element={
-                  <div className="transactions-container">
+                  <div className='transactions-container'>
                     <Transactions />
                   </div>
                 }

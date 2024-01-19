@@ -9,9 +9,9 @@ import {
   StatArrow,
   Text,
 } from '@chakra-ui/react';
-import BarChart from './Dashboard/BarChart.jsx';
+import BarChart from './Dashboard/BarChart.tsx';
 import DoughnutChart from './Dashboard/DoughnutChart.jsx';
-import LineChart from './Dashboard/LineChart.jsx';
+import LineChart from './Dashboard/LineChart.tsx';
 import { Flex, Select } from '@chakra-ui/react';
 import DashboardRecentTransactions from './DashboardRecentTransactions.jsx';
 
