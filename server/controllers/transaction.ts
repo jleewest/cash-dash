@@ -12,7 +12,7 @@ export async function getAllTransactions(req: Request, res: Response): Promise<v
     res.send(transactions);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error.message);
+    res.status(500)/*.send(error.message)*/;
   }
 }
 
@@ -24,7 +24,7 @@ export async function createTransaction(req: Request, res: Response): Promise<vo
     res.send(transaction);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error.message);
+    res.status(500)/*.send(error.message)*/;
   }
 }
 
@@ -42,7 +42,7 @@ export async function updateTransaction(req: Request, res: Response): Promise<vo
     res.send(transaction);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error.message);
+    res.status(500)/*.send(Error.message)*/;
   }
 }
 
@@ -59,7 +59,7 @@ export async function deleteTransaction(req: Request, res: Response): Promise<vo
     res.status(204).end();
   } catch (error) {
     console.error(error);
-    res.status(500).send(error.message);
+    res.status(500)/*.send(error.message)*/;
   }
 }
 
