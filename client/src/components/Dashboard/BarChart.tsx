@@ -47,7 +47,7 @@ const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
       ...Object.keys(incomeGrouped).map(Number),
       ...Object.keys(expensesGrouped).map(Number),
     ]),
-  ].sort((a: number, b: number) => a - b);
+  ].sort((a, b) => a - b);
 
   // Create labels and data for income and expenses
   const labels = sortedMonths.map((month) =>
