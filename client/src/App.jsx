@@ -3,7 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar.tsx';
 import Transactions from './components/Transactions.tsx';
 import Header from './components/Header.tsx';
-import Dashboard from './components/Dashboard.jsx';
+import Dashboard from './components/Dashboard.tsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Todo: API requests all in separate file

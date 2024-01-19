@@ -17,6 +17,7 @@ import DashboardRecentTransactions from './DashboardRecentTransactions.tsx';
 
 defaults.responsive = true;
 defaults.plugins.title.display = true;
+///@ts-ignore
 defaults.plugins.title.font.size = 20;
 defaults.plugins.title.color = 'black';
 
@@ -29,16 +30,17 @@ defaults.plugins.title.color = 'black';
 
 const Dashboard = () => {
   // Context
+  //@ts-ignore
   const { transactions } = useContext(TransactionsContext);
   // State
   const [selectedYear, setSelectedYear] = useState('2024');
 
   // Filter transactions by year to pass to charts
   const transactionsByYear = transactions.filter(
+    //@ts-ignore
     (transaction) =>
       new Date(transaction.date).getFullYear().toString() === selectedYear
   );
-
   return (
     <>
       {/* Header: date and year selection */}
@@ -85,6 +87,7 @@ const Dashboard = () => {
           <StatLabel>Total Balance</StatLabel>
           <StatNumber>
             {transactionsByYear
+              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
             €
@@ -100,7 +103,9 @@ const Dashboard = () => {
           <StatLabel>Total Income</StatLabel>
           <StatNumber>
             {transactionsByYear
+              //@ts-ignore
               .filter((transaction) => transaction.type === 'income')
+              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
           </StatNumber>
@@ -115,7 +120,9 @@ const Dashboard = () => {
           <StatLabel>Total Expenses</StatLabel>
           <StatNumber>
             {transactionsByYear
+              //@ts-ignore
               .filter((transaction) => transaction.type === 'expense')
+              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
           </StatNumber>
