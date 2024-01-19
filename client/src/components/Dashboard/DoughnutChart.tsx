@@ -1,17 +1,9 @@
 import { Doughnut } from 'react-chartjs-2';
+import { Transaction } from './ChartUtil';
 
 // Todo: put all transaction filtering logic in separate file
 type DoughnutChartProps = {
   transactionsByYear: Transaction[];
-};
-
-type Transaction = {
-  amount: number;
-  category: string;
-  date: string;
-  id: number;
-  note: string;
-  type: string;
 };
 
 const DoughnutChart: React.FC<DoughnutChartProps> = ({

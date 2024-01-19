@@ -1,18 +1,10 @@
 import { Bar } from 'react-chartjs-2';
+import { Transaction, groupByMonth, getSortedMonths } from './ChartUtil';
 
 // Todo: put all transaction filtering logic in separate file
 
 type BarChartProps = {
   transactionsByYear: Transaction[];
-};
-
-type Transaction = {
-  amount: number;
-  category: string;
-  date: string;
-  id: number;
-  note: string;
-  type: string;
 };
 
 const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
@@ -25,29 +17,11 @@ const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   );
 
   // Group transactions by month and calculate total income and expenses
-  const groupByMonth = (transactions: Transaction[]) => {
-    return transactions.reduce(
-      (acc, transaction) => {
-        const month = new Date(transaction.date).getMonth();
-        if (!acc[month]) acc[month] = 0;
-        // Use absolute value of amount
-        acc[month] += Math.abs(transaction.amount);
-        return acc;
-      },
-      {} as Record<number, number>
-    );
-  };
-
   const incomeGrouped = groupByMonth(incomeTransactions);
   const expensesGrouped = groupByMonth(expensesTransactions);
 
   // Get all unique months from income and expenses transactions, and sort them
-  const sortedMonths = [
-    ...new Set([
-      ...Object.keys(incomeGrouped).map(Number),
-      ...Object.keys(expensesGrouped).map(Number),
-    ]),
-  ].sort((a, b) => a - b);
+  const sortedMonths = getSortedMonths(incomeGrouped, expensesGrouped);
 
   // Create labels and data for income and expenses
   const labels = sortedMonths.map((month) =>
