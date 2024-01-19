@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { TransactionsContext } from '../App.jsx';
+import { TransactionsContext } from '../App.tsx';
 import { defaults } from 'chart.js/auto';
 import {
   Stat,

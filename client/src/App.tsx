@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Todo: implement error catching for all APIs
 
 // TransactionsContext is used to pass transactions throughout the app
+//@ts-ignore
 export const TransactionsContext = React.createContext();
 
 function App() {
@@ -21,12 +22,14 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         const sortedTransactions = data
+          //@ts-ignore
           .map((transaction) => ({
             ...transaction,
             // DB stores amount in cents
             amount: transaction.amount / 100,
           }))
           // Sort transactions by date
+          //@ts-ignore
           .sort((a, b) => new Date(b.date) - new Date(a.date));
         setTransactions(sortedTransactions);
       });
