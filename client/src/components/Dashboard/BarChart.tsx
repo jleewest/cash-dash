@@ -1,7 +1,8 @@
 import { Bar } from 'react-chartjs-2';
 
 // Todo: put all transaction filtering logic in separate file
-type LineChartProps = {
+
+type BarChartProps = {
   transactionsByYear: Transaction[];
 };
 
@@ -13,8 +14,8 @@ type Transaction = {
   note: string;
   type: string;
 };
-//@ts-ignore
-const BarChart: React.FC<props> = ({ transactionsByYear }) => {
+
+const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   // Split transactions into income and expenses
   const incomeTransactions = transactionsByYear.filter(
     (transaction: Transaction) => transaction.type === 'income'
@@ -25,16 +26,16 @@ const BarChart: React.FC<props> = ({ transactionsByYear }) => {
 
   // Group transactions by month and calculate total income and expenses
   const groupByMonth = (transactions: Transaction[]) => {
-    //@ts-ignore
-    return transactions.reduce((acc, transaction) => {
-      const month = new Date(transaction.date).getMonth();
-      //@ts-ignore
-      if (!acc[month]) acc[month] = 0;
-      // Use absolute value of amount
-      //@ts-ignore
-      acc[month] += Math.abs(transaction.amount);
-      return acc;
-    }, {});
+    return transactions.reduce(
+      (acc: Record<number, number>, transaction: Transaction) => {
+        const month = new Date(transaction.date).getMonth();
+        if (!acc[month]) acc[month] = 0;
+        // Use absolute value of amount
+        acc[month] += Math.abs(transaction.amount);
+        return acc;
+      },
+      {}
+    );
   };
 
   const incomeGrouped = groupByMonth(incomeTransactions);
@@ -43,15 +44,13 @@ const BarChart: React.FC<props> = ({ transactionsByYear }) => {
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = [
     ...new Set([
-      ...Object.keys(incomeGrouped),
-      ...Object.keys(expensesGrouped),
+      ...Object.keys(incomeGrouped).map(Number),
+      ...Object.keys(expensesGrouped).map(Number),
     ]),
-    //@ts-ignore
-  ].sort((a, b) => a - b);
+  ].sort((a: number, b: number) => a - b);
 
   // Create labels and data for income and expenses
   const labels = sortedMonths.map((month) =>
-    //@ts-ignore
     new Date(2023, month).toLocaleString('default', { month: 'short' })
   );
   const incomeData = sortedMonths.map((month) => incomeGrouped[month] || 0);
