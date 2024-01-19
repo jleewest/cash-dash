@@ -13,7 +13,7 @@ import BarChart from './Dashboard/BarChart.tsx';
 import DoughnutChart from './Dashboard/DoughnutChart.tsx';
 import LineChart from './Dashboard/LineChart.tsx';
 import { Flex, Select } from '@chakra-ui/react';
-import DashboardRecentTransactions from './DashboardRecentTransactions.jsx';
+import DashboardRecentTransactions from './DashboardRecentTransactions.tsx';
 
 defaults.responsive = true;
 defaults.plugins.title.display = true;
