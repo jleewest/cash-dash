@@ -14,8 +14,7 @@ type Transaction = {
   type: string;
 };
 
-//@ts-ignore
-const LineChart = ({ transactionsByYear }) => {
+const LineChart: React.FC<LineChartProps> = ({ transactionsByYear }) => {
   // Split transactions into income and expenses
   const incomeTransactions = transactionsByYear.filter(
     (transaction: Transaction) => transaction.type === 'income'
@@ -26,16 +25,16 @@ const LineChart = ({ transactionsByYear }) => {
 
   // Group transactions by month and calculate total income and expenses
   const groupByMonth = (transactions: Transaction[]) => {
-    //@ts-ignore
-    return transactions.reduce((acc, transaction) => {
-      const month = new Date(transaction.date).getMonth();
-      //@ts-ignore
-      if (!acc[month]) acc[month] = 0;
-      // Use absolute value of amount
-      //@ts-ignore
-      acc[month] += Math.abs(transaction.amount);
-      return acc;
-    }, {});
+    return transactions.reduce(
+      (acc: Record<number, number>, transaction: Transaction) => {
+        const month = new Date(transaction.date).getMonth();
+        if (!acc[month]) acc[month] = 0;
+        // Use absolute value of amount
+        acc[month] += Math.abs(transaction.amount);
+        return acc;
+      },
+      {}
+    );
   };
 
   const incomeGrouped = groupByMonth(incomeTransactions);
@@ -44,19 +43,16 @@ const LineChart = ({ transactionsByYear }) => {
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = [
     ...new Set([
-      ...Object.keys(incomeGrouped),
-      ...Object.keys(expensesGrouped),
+      ...Object.keys(incomeGrouped).map(Number),
+      ...Object.keys(expensesGrouped).map(Number),
     ]),
-    //@ts-ignore
   ].sort((a, b) => a - b);
 
   // Create labels and data for income and expenses
   const labels = sortedMonths.map((month) =>
-    //@ts-ignore
     new Date(2023, month).toLocaleString('default', { month: 'short' })
   );
   const balanceData = sortedMonths.map(
-    //@ts-ignore
     (month) => (incomeGrouped[month] || 0) - (expensesGrouped[month] || 0)
   );
 
