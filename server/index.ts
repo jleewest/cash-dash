@@ -8,7 +8,7 @@ const app: Application = express();
 
 app.use(cors()).use(express.json()).use(router);
 
-const PORT: number = parseInt(process.env.Port as string, 10) || 3000;
+const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT}...`);
