@@ -1,6 +1,5 @@
-import { useContext, useState } from 'react';
-import { TransactionsContext } from '../App.tsx';
-import { defaults } from 'chart.js/auto';
+import { useState } from 'react';
+import Chart from 'chart.js/auto';
 import {
   Stat,
   StatLabel,
@@ -14,12 +13,13 @@ import DoughnutChart from './Dashboard/DoughnutChart.tsx';
 import LineChart from './Dashboard/LineChart.tsx';
 import { Flex, Select } from '@chakra-ui/react';
 import DashboardRecentTransactions from './DashboardRecentTransactions.tsx';
+import { useTransactionContext } from '../transaction.tsx';
 
-defaults.responsive = true;
-defaults.plugins.title.display = true;
-///@ts-ignore
-defaults.plugins.title.font.size = 20;
-defaults.plugins.title.color = 'black';
+Chart.defaults.responsive = true;
+Chart.defaults.plugins.title.display = true;
+//@ts-expect-error
+Chart.defaults.plugins.title.font.size = 20;
+Chart.defaults.plugins.title.color = 'black';
 
 // Todo: logic for when there are no transactions
 // Todo: make Stats as external component
@@ -30,14 +30,12 @@ defaults.plugins.title.color = 'black';
 
 const Dashboard = () => {
   // Context
-  //@ts-ignore
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactionContext();
   // State
   const [selectedYear, setSelectedYear] = useState('2024');
 
   // Filter transactions by year to pass to charts
   const transactionsByYear = transactions.filter(
-    //@ts-ignore
     (transaction) =>
       new Date(transaction.date).getFullYear().toString() === selectedYear
   );
@@ -143,7 +141,7 @@ const Dashboard = () => {
           <LineChart transactionsByYear={transactionsByYear} />
         </div>
         <div className='recent-transactions'>
-          <DashboardRecentTransactions transactions={transactions} />
+          <DashboardRecentTransactions />
         </div>
       </div>
     </>
