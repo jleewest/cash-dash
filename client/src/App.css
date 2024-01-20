@@ -1,6 +1,7 @@
 /* Todo: Refactor all styling, including index.css and inline styling */
 /* Todo: Remove duplicate or not needed tags/stylings */
 
+/* GLOBAL */
 .app {
   max-width: 1280px;
   min-height: 60vh;
@@ -13,17 +14,24 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+/* icons */
+.icon {
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  color: #0902ff60;
+}
+
+.link:hover,
+.icon:hover,
+.link:hover .icon {
+  color: #0902ff90;
+}
+
+/* APP COMPONENT */
+
 .header-navbar-container {
   display: flex;
   flex-direction: column;
-}
-
-.navbar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 2rem auto;
-  height: 100%;
 }
 
 header {
@@ -40,31 +48,9 @@ header {
   background: linear-gradient(270deg, rgba(255, 255, 255, 0.1), transparent);
 }
 
-nav ul {
-  margin: 0;
-  text-align: left;
-}
-
 h1 {
   font-size: 2rem;
   font-weight: 100;
-}
-
-nav ul a {
-  font-size: 1.5rem;
-}
-
-.user {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.signout {
-  margin-top: 0.5rem;
-  display: flex;
-  align-items: center;
 }
 
 .main {
@@ -133,18 +119,6 @@ nav ul a {
 .recent-transactions {
   grid-column: span 5;
   grid-row: span 3;
-}
-
-.icon {
-  font-size: 1.3rem;
-  margin-right: 1rem;
-  color: #0902ff60;
-}
-
-.link:hover,
-.icon:hover,
-.link:hover .icon {
-  color: #0902ff90;
 }
 
 .red {

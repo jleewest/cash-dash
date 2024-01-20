@@ -4,6 +4,7 @@ import { faHouse, faTableList } from '@fortawesome/free-solid-svg-icons';
 import { Avatar } from '@chakra-ui/react';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import user from '../assets/user.jpg';
+import './NavBar.css';
 
 // Display navigation bar and user details at the bottom
 const NavBar = () => {
