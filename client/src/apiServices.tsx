@@ -33,8 +33,11 @@ export async function deleteTransaction(transactionId: number) {
       method: 'DELETE',
       mode: 'cors',
     });
-    const data = await response.json();
-    return data;
+    if (response.ok) {
+      return;
+    } else {
+      throw new Error('Failed to delete transaction');
+    }
   } catch (e) {
     console.log(e);
   }
