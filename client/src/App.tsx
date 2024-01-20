@@ -9,9 +9,6 @@ import { Transaction, TransactionsContext } from './transaction.tsx';
 import { getTransactions } from './apiServices.tsx';
 export { TransactionsContext };
 
-// Todo: API requests all in separate file
-// Todo: implement error catching for all APIs
-
 // TransactionsContext is used to pass transactions throughout the app
 function App() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
