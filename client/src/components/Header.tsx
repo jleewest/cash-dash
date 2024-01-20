@@ -1,5 +1,6 @@
 import logo from '../assets/logo.png';
 import { Heading, Highlight } from '@chakra-ui/react';
+import './Header.css';
 
 // Display Logo and App Name
 const Header = () => {
