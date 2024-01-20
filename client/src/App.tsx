@@ -7,7 +7,6 @@ import Dashboard from './components/Dashboard.tsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Transaction, TransactionsContext } from './transaction.tsx';
 import { getTransactions } from './apiServices.tsx';
-export { TransactionsContext };
 
 // TransactionsContext is used to pass transactions throughout the app
 function App() {

@@ -1,5 +1,5 @@
 import { Doughnut } from 'react-chartjs-2';
-import { Transaction } from './ChartUtil';
+import { Transaction } from '../../transaction';
 
 // Todo: put all transaction filtering logic in separate file
 type DoughnutChartProps = {

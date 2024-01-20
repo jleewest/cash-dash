@@ -1,5 +1,6 @@
 import { Line } from 'react-chartjs-2';
-import { Transaction, groupByMonth, getSortedMonths } from './ChartUtil';
+import { groupByMonth, getSortedMonths } from './ChartUtil';
+import { Transaction } from '../../transaction';
 
 // Todo: put all transaction filtering logic in separate file
 type LineChartProps = {

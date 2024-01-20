@@ -1,11 +1,4 @@
-export class Transaction {
-  'amount': number;
-  'category': string;
-  'date': string;
-  'id': number;
-  'note': string;
-  'type': string;
-}
+import { Transaction } from '../../transaction';
 
 // Group transactions by month and calculate total income and expenses
 export const groupByMonth = (transactions: Transaction[]) => {

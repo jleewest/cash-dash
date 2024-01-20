@@ -1,7 +1,10 @@
 import React from 'react';
-import { useEffect, useState, useContext } from 'react';
-import { TransactionsContext } from '../App.jsx';
-import { TransactionAttributes } from '../../../server/models/transaction.js';
+import { useEffect, useState } from 'react';
+import {
+  useTransactionContext,
+  Transaction,
+  TransactionData,
+} from '../transaction';
 import {
   Button,
   FormControl,
@@ -18,6 +21,7 @@ import {
   Switch,
   useToast,
 } from '@chakra-ui/react';
+import { changeTransaction, postTransaction } from '../apiServices';
 
 // Todo: clicking outside of modal doesn't empty form fields
 // Todo: move all api calls to separate file
@@ -26,12 +30,20 @@ import {
 interface FormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedTransaction: TransactionAttributes | null;
+  selectedTransaction: Transaction | null;
 }
+
+//type TransactionData = {
+//      date: string,
+//      category: string,
+//      amount: number,
+//      note: string,
+//      type: string,
+//}
 
 function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Context
-  const { setTransactions } = useContext(TransactionsContext);
+  const { setTransactions } = useTransactionContext();
   // States
   const [date, setDate] = useState('');
   const [category, setCategory] = useState('');
@@ -62,27 +74,26 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   }, [selectedTransaction]);
 
   // Form field change handling
-  function handleDateChange(e) {
+  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDate(e.target.value);
   }
 
-  function handleCategoryChange(e) {
+  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setCategory(e.target.value);
   }
 
-  function handleAmountChange(e) {
+  function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
     const amount = e.target.value;
     setAmount(amount);
   }
 
-  function handleNoteChange(e) {
+  function handleNoteChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNote(e.target.value);
   }
 
   // Form submission handling
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('date', date);
     const amountNumber = Number(amount);
 
     // Form validation
@@ -115,30 +126,16 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
     // Update transaction or create new transaction in database
     let response;
     if (selectedTransaction) {
-      response = await fetch(
-        `http://localhost:3000/transactions/${selectedTransaction.id}`,
-        {
-          method: 'PUT',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(transactionData),
-        }
+      response = await changeTransaction(
+        transactionData,
+        selectedTransaction.id
       );
     } else {
-      response = await fetch('http://localhost:3000/transactions', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(transactionData),
-      });
+      response = await postTransaction(transactionData);
     }
 
     // Update transactions state
-    const updatedTransaction = await response.json();
+    const updatedTransaction = await response;
     updatedTransaction.amount = updatedTransaction.amount / 100;
     setTransactions((oldTransactions) => {
       if (selectedTransaction) {

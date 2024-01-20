@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormModal from './FormModal.tsx';
-import { TransactionsContext } from '../App.tsx';
+import { useTransactionContext, Transaction } from '../transaction.tsx';
+import { deleteTransaction } from '../apiServices.tsx';
 import {
   Button,
   Table,
@@ -37,13 +38,13 @@ import {
 
 const Transactions = () => {
   // Context
-  //@ts-ignore
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactionContext();
 
   // States
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
   const [selectedTab, setSelectedTab] = useState('All');
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,17 +55,14 @@ const Transactions = () => {
   useEffect(() => {
     let result = transactions;
     if (selectedTab === 'Expenses') {
-      //@ts-ignore
       result = result.filter((transaction) => transaction.type === 'expense');
     } else if (selectedTab === 'Income') {
-      //@ts-ignore
       result = result.filter((transaction) => transaction.type === 'income');
     }
 
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
     result = result.filter(
-      //@ts-ignore
       (transaction) =>
         (transaction.date &&
           transaction.date
@@ -83,22 +81,18 @@ const Transactions = () => {
   }, [selectedTab, transactions, searchTerm]);
 
   // Remove transaction
-  //@ts-ignore
-  async function handleRemove(transactionId) {
-    await fetch(`http://localhost:3000/transactions/${transactionId}`, {
-      method: 'DELETE',
-      mode: 'cors',
-    });
-    toast({
-      title: 'Transaction deleted',
-      status: 'success',
-      isClosable: true,
-      position: 'top',
-    });
+  async function handleRemove(transactionId: number) {
+    deleteTransaction(transactionId).then(() =>
+      toast({
+        title: 'Transaction deleted',
+        status: 'success',
+        isClosable: true,
+        position: 'top',
+      })
+    );
   }
 
-  //@ts-ignore
-  function openModal(transaction) {
+  function openModal(transaction: Transaction | null) {
     setSelectedTransaction(transaction);
     setShowModal(true);
   }
@@ -108,18 +102,15 @@ const Transactions = () => {
     setShowModal(false);
   }
 
-  //@ts-ignore
-  function handleTabClick(tab) {
+  function handleTabClick(tab: string) {
     setSelectedTab(tab);
   }
 
-  //@ts-ignore
-  function handleSearchChange(event) {
+  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);
   }
 
   return (
-    //@ts-ignore
     <>
       {/* FormModal component opens with either selected transactions or none */}
       <FormModal
