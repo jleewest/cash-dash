@@ -11,7 +11,7 @@ export class Transaction {
 
 export type TTransactionContext = {
   transactions: Transaction[];
-  setTransactions: Dispatch<SetStateAction<never[]>>;
+  setTransactions: Dispatch<SetStateAction<Transaction[]>>;
 };
 
 export const TransactionsContext = createContext<TTransactionContext | null>(
