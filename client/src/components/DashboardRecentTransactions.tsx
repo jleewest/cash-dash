@@ -19,7 +19,7 @@ const DashboardRecentTransactions = () => {
 
   return (
     <TableContainer>
-      <Table variant='striped' colorScheme='gray' size='sm' className='table'>
+      <Table variant='striped' colorScheme='gray' size='sm'>
         <caption>Recent Transactions</caption>
         <Thead>
           <Tr>

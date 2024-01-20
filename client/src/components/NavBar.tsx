@@ -36,7 +36,7 @@ const NavBar = () => {
             size='lg'
             boxShadow={'0 0 10px rgba(0, 0, 0, 0.5)'}
           />
-          <div className='user-details'>
+          <div>
             <h3>John Doe</h3>
             <p>john.doe@cashdash.com</p>
           </div>
