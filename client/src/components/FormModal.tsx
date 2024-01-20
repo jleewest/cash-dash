@@ -21,7 +21,7 @@ import {
   Switch,
   useToast,
 } from '@chakra-ui/react';
-import { postTransaction } from '../apiServices';
+import { changeTransaction, postTransaction } from '../apiServices';
 
 // Todo: clicking outside of modal doesn't empty form fields
 // Todo: move all api calls to separate file
@@ -94,7 +94,6 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Form submission handling
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('date', date);
     const amountNumber = Number(amount);
 
     // Form validation
@@ -127,24 +126,16 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
     // Update transaction or create new transaction in database
     let response;
     if (selectedTransaction) {
-      response = await fetch(
-        `http://localhost:3000/transactions/${selectedTransaction.id}`,
-        {
-          method: 'PUT',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(transactionData),
-        }
+      response = await changeTransaction(
+        transactionData,
+        selectedTransaction.id
       );
     } else {
       response = await postTransaction(transactionData);
     }
 
     // Update transactions state
-    const updatedTransaction = await response.json();
-
+    const updatedTransaction = await response;
     updatedTransaction.amount = updatedTransaction.amount / 100;
     setTransactions((oldTransactions) => {
       if (selectedTransaction) {

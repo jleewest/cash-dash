@@ -39,3 +39,21 @@ export async function deleteTransaction(transactionId: number) {
     console.log(e);
   }
 }
+
+export async function changeTransaction(
+  transactionData: TransactionData,
+  transactionId: number
+) {
+  try {
+    const response = await fetch(`${BASE_URL}/${transactionId}`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(transactionData),
+    });
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+}
