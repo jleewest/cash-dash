@@ -5,7 +5,7 @@ import Transactions from './components/Transactions.tsx';
 import Header from './components/Header.tsx';
 import Dashboard from './components/Dashboard.tsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { TransactionsContext } from './transaction.tsx';
+import { Transaction, TransactionsContext } from './transaction.tsx';
 import { getTransactions } from './apiServices.tsx';
 export { TransactionsContext };
 
@@ -14,23 +14,29 @@ export { TransactionsContext };
 
 // TransactionsContext is used to pass transactions throughout the app
 function App() {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   // Fetch transactions from server
   useEffect(() => {
-    getTransactions().then((data) => {
-      const sortedTransactions = data
-        //@ts-ignore
-        .map((transaction) => ({
-          ...transaction,
-          // DB stores amount in cents
-          amount: transaction.amount / 100,
-        }))
-        // Sort transactions by date
-        //@ts-ignore
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
-      setTransactions(sortedTransactions);
-    });
+    const fetchTransactions = async () => {
+      try {
+        const data = await getTransactions();
+        const sortedTransactions: Transaction[] = data
+          .map((transaction: Transaction) => ({
+            ...transaction,
+            // DB stores amount in cents
+            amount: transaction.amount / 100,
+          }))
+          // Sort transactions by date
+          .sort((a: Record<string, string>, b: Record<string, string>) => {
+            new Date(b.date).getTime() - new Date(a.date).getTime();
+          });
+        setTransactions(sortedTransactions);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTransactions();
   }, [transactions]); // Causes infinite loop, remove dependency, but then transactions don't update when modyfing them
 
   return (
