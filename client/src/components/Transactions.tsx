@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormModal from './FormModal.tsx';
-import { TransactionsContext } from '../App.tsx';
+import { useTransactionContext } from '../transaction.tsx';
 import {
   Button,
   Table,
@@ -37,8 +37,7 @@ import {
 
 const Transactions = () => {
   // Context
-  //@ts-ignore
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactionContext();
 
   // States
   const [filteredTransactions, setFilteredTransactions] =
@@ -54,17 +53,14 @@ const Transactions = () => {
   useEffect(() => {
     let result = transactions;
     if (selectedTab === 'Expenses') {
-      //@ts-ignore
       result = result.filter((transaction) => transaction.type === 'expense');
     } else if (selectedTab === 'Income') {
-      //@ts-ignore
       result = result.filter((transaction) => transaction.type === 'income');
     }
 
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
     result = result.filter(
-      //@ts-ignore
       (transaction) =>
         (transaction.date &&
           transaction.date
