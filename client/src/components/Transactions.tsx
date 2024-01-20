@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import FormModal from './FormModal.tsx';
-import { useTransactionContext } from '../transaction.tsx';
+import { useTransactionContext, Transaction } from '../transaction.tsx';
 import { deleteTransaction } from '../apiServices.tsx';
 import {
   Button,
@@ -43,7 +43,8 @@ const Transactions = () => {
   // States
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
   const [selectedTab, setSelectedTab] = useState('All');
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -91,8 +92,7 @@ const Transactions = () => {
     );
   }
 
-  //@ts-ignore
-  function openModal(transaction) {
+  function openModal(transaction: Transaction | null) {
     setSelectedTransaction(transaction);
     setShowModal(true);
   }
@@ -102,18 +102,15 @@ const Transactions = () => {
     setShowModal(false);
   }
 
-  //@ts-ignore
-  function handleTabClick(tab) {
+  function handleTabClick(tab: string) {
     setSelectedTab(tab);
   }
 
-  //@ts-ignore
-  function handleSearchChange(event) {
+  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);
   }
 
   return (
-    //@ts-ignore
     <>
       {/* FormModal component opens with either selected transactions or none */}
       <FormModal
