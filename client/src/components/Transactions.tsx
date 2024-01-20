@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FormModal from './FormModal.tsx';
 import { useTransactionContext } from '../transaction.tsx';
+import { deleteTransaction } from '../apiServices.tsx';
 import {
   Button,
   Table,
@@ -79,18 +80,15 @@ const Transactions = () => {
   }, [selectedTab, transactions, searchTerm]);
 
   // Remove transaction
-  //@ts-ignore
-  async function handleRemove(transactionId) {
-    await fetch(`http://localhost:3000/transactions/${transactionId}`, {
-      method: 'DELETE',
-      mode: 'cors',
-    });
-    toast({
-      title: 'Transaction deleted',
-      status: 'success',
-      isClosable: true,
-      position: 'top',
-    });
+  async function handleRemove(transactionId: number) {
+    deleteTransaction(transactionId).then(() =>
+      toast({
+        title: 'Transaction deleted',
+        status: 'success',
+        isClosable: true,
+        position: 'top',
+      })
+    );
   }
 
   //@ts-ignore
