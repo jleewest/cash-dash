@@ -34,7 +34,6 @@ function App() {
     };
     fetchTransactions();
   }, [transactions]); // Causes infinite loop, remove dependency, but then transactions don't update when modyfing them
-
   return (
     <Router>
       <div className='app'>
