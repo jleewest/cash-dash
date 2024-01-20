@@ -156,7 +156,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size='xl'>
+      <Modal isOpen={isOpen} onClose={onClose} size='xl' id='modal'>
         <ModalOverlay />
         <ModalContent borderRadius={16}>
           <ModalHeader>
