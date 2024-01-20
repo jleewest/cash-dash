@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Chart from 'chart.js/auto';
+import './Dashboard.css';
 import {
   Stat,
   StatLabel,
@@ -42,12 +43,7 @@ const Dashboard = () => {
   return (
     <>
       {/* Header: date and year selection */}
-      <Flex
-        className='dashboard-header'
-        mb={2}
-        justifyContent='space-between'
-        align='center'
-      >
+      <Flex mb={2} justifyContent='space-between' align='center'>
         {/* Date */}
         <Text
           fontSize='2xl'

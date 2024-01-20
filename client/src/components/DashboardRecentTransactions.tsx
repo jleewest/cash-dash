@@ -9,6 +9,7 @@ import {
   Tag,
   TagLabel,
 } from '@chakra-ui/react';
+import './DashboardRecentTransactions.css';
 import { useTransactionContext } from '../transaction.tsx';
 import moment from 'moment';
 
@@ -18,7 +19,7 @@ const DashboardRecentTransactions = () => {
 
   return (
     <TableContainer>
-      <Table variant='striped' colorScheme='gray' size='sm' className='table'>
+      <Table variant='striped' colorScheme='gray' size='sm'>
         <caption>Recent Transactions</caption>
         <Thead>
           <Tr>

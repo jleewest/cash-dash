@@ -50,7 +50,7 @@ function App() {
               <Route
                 path='/'
                 element={
-                  <div className='dashboard-container'>
+                  <div>
                     <Dashboard />
                   </div>
                 }

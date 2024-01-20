@@ -1,12 +1,13 @@
 import logo from '../assets/logo.png';
 import { Heading, Highlight } from '@chakra-ui/react';
+import './Header.css';
 
 // Display Logo and App Name
 const Header = () => {
   return (
     <header>
       {/* Logo */}
-      <div className='logo-bg'>
+      <div>
         <img src={logo} alt='logo' width={160} className='logo' />
       </div>
       {/* App name */}

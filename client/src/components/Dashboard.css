@@ -1,0 +1,47 @@
+/* Dashboard grid */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  grid-gap: 2rem;
+  width: 100%;
+}
+
+.dashboard > * {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  background-color: #ffffff70;
+}
+
+.stat {
+  display: grid;
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+/* bar-chart visual */
+.bar-chart {
+  grid-column: span 7;
+  grid-row: span 3;
+  width: 100%;
+}
+
+/* doughnut-chart visual */
+.doughnut-chart {
+  grid-column: span 5;
+  grid-row: span 3;
+  width: 100%;
+}
+
+/* line-chart visual */
+.line-chart {
+  grid-column: span 7;
+  grid-row: span 3;
+  width: 100%;
+}
+
+/* recent-transactions visual */
+.recent-transactions {
+  grid-column: span 5;
+  grid-row: span 3;
+}
