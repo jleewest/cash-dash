@@ -32,14 +32,6 @@ interface FormModalProps {
   selectedTransaction: Transaction | null;
 }
 
-//type TransactionData = {
-//      date: string,
-//      category: string,
-//      amount: number,
-//      note: string,
-//      type: string,
-//}
-
 function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Context
   const { setTransactions } = useTransactionContext();
