@@ -57,12 +57,6 @@ h1 {
   border-radius: 16px;
 }
 
-.table-container {
-  overflow: scroll;
-  max-height: 70vh;
-  margin-top: 1rem;
-}
-
 /* Dashboard grid */
 .dashboard {
   display: grid;

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import FormModal from './FormModal.tsx';
 import { useTransactionContext, Transaction } from '../transaction.tsx';
 import { deleteTransaction } from '../apiServices.tsx';
+import './Transactions.css';
 import {
   Button,
   Table,
@@ -111,7 +112,7 @@ const Transactions = () => {
   }
 
   return (
-    <>
+    <div className='Transactions'>
       {/* FormModal component opens with either selected transactions or none */}
       <FormModal
         isOpen={showModal}
@@ -233,7 +234,7 @@ const Transactions = () => {
           </Table>
         </TableContainer>
       </div>
-    </>
+    </div>
   );
 };
 
