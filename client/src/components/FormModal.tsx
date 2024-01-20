@@ -1,6 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useTransactionContext, Transaction } from '../transaction';
+import {
+  useTransactionContext,
+  Transaction,
+  TransactionData,
+} from '../transaction';
 import {
   Button,
   FormControl,
@@ -17,6 +21,7 @@ import {
   Switch,
   useToast,
 } from '@chakra-ui/react';
+import { postTransaction } from '../apiServices';
 
 // Todo: clicking outside of modal doesn't empty form fields
 // Todo: move all api calls to separate file
@@ -27,6 +32,14 @@ interface FormModalProps {
   onClose: () => void;
   selectedTransaction: Transaction | null;
 }
+
+//type TransactionData = {
+//      date: string,
+//      category: string,
+//      amount: number,
+//      note: string,
+//      type: string,
+//}
 
 function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Context
@@ -126,18 +139,12 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
         }
       );
     } else {
-      response = await fetch('http://localhost:3000/transactions', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(transactionData),
-      });
+      response = await postTransaction(transactionData);
     }
 
     // Update transactions state
     const updatedTransaction = await response.json();
+
     updatedTransaction.amount = updatedTransaction.amount / 100;
     setTransactions((oldTransactions) => {
       if (selectedTransaction) {
