@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Chart from 'chart.js/auto';
+import './Dashboard.css';
 import {
   Stat,
   StatLabel,
