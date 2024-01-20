@@ -1,10 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import {
-  useTransactionContext,
-  Transaction,
-  TransactionData,
-} from '../transaction';
+import { useTransactionContext, Transaction } from '../transaction';
 import {
   Button,
   FormControl,
@@ -31,14 +27,6 @@ interface FormModalProps {
   onClose: () => void;
   selectedTransaction: Transaction | null;
 }
-
-//type TransactionData = {
-//      date: string,
-//      category: string,
-//      amount: number,
-//      note: string,
-//      type: string,
-//}
 
 function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Context
@@ -73,21 +61,26 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   }, [selectedTransaction]);
 
   // Form field change handling
-  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setDate(e.target.value);
-  }
-
-  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setCategory(e.target.value);
-  }
-
-  function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const amount = e.target.value;
-    setAmount(amount);
-  }
-
-  function handleNoteChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setNote(e.target.value);
+  function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'date':
+        setDate(value);
+        break;
+      case 'category':
+        setCategory(value);
+        break;
+      case 'amount':
+        setAmount(value);
+        break;
+      case 'note':
+        setNote(value);
+        break;
+      default:
+        break;
+    }
   }
 
   // Form submission handling
@@ -197,7 +190,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   type='date'
                   id='date'
                   value={date}
-                  onChange={handleDateChange}
+                  onChange={handleInputChange}
                   name='date'
                   mb='6'
                   borderRadius={16}
@@ -210,7 +203,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                 <Select
                   id='category'
                   value={category}
-                  onChange={handleCategoryChange}
+                  onChange={handleInputChange}
                   name='category'
                   placeholder='Select category'
                   mb='6'
@@ -248,7 +241,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   type='number'
                   id='amount'
                   value={amount}
-                  onChange={handleAmountChange}
+                  onChange={handleInputChange}
                   name='amount'
                   mb='6'
                   borderRadius={16}
@@ -261,7 +254,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                 type='text'
                 id='note'
                 value={note}
-                onChange={handleNoteChange}
+                onChange={handleInputChange}
                 name='note'
                 mb='6'
                 borderRadius={16}
