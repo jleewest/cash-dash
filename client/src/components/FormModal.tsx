@@ -1,7 +1,6 @@
 import React from 'react';
-import { useEffect, useState, useContext } from 'react';
-import { TransactionsContext } from '../App.jsx';
-import { TransactionAttributes } from '../../../server/models/transaction.js';
+import { useEffect, useState } from 'react';
+import { useTransactionContext, Transaction } from '../transaction';
 import {
   Button,
   FormControl,
@@ -26,12 +25,12 @@ import {
 interface FormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedTransaction: TransactionAttributes | null;
+  selectedTransaction: Transaction | null;
 }
 
 function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   // Context
-  const { setTransactions } = useContext(TransactionsContext);
+  const { setTransactions } = useTransactionContext();
   // States
   const [date, setDate] = useState('');
   const [category, setCategory] = useState('');
@@ -62,20 +61,20 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
   }, [selectedTransaction]);
 
   // Form field change handling
-  function handleDateChange(e) {
+  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDate(e.target.value);
   }
 
-  function handleCategoryChange(e) {
+  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setCategory(e.target.value);
   }
 
-  function handleAmountChange(e) {
+  function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
     const amount = e.target.value;
     setAmount(amount);
   }
 
-  function handleNoteChange(e) {
+  function handleNoteChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNote(e.target.value);
   }
 
