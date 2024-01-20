@@ -2,8 +2,6 @@ import { Bar } from 'react-chartjs-2';
 import { groupByMonth, getSortedMonths } from './ChartUtil';
 import { Transaction } from '../../transaction';
 
-// Todo: put all transaction filtering logic in separate file
-
 type BarChartProps = {
   transactionsByYear: Transaction[];
 };

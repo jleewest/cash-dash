@@ -24,7 +24,6 @@ import {
 import { changeTransaction, postTransaction } from '../apiServices';
 
 // Todo: clicking outside of modal doesn't empty form fields
-// Todo: move all api calls to separate file
 // Todo: ability to add, edit, remove categories
 
 interface FormModalProps {

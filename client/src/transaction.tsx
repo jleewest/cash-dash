@@ -9,6 +9,14 @@ export type Transaction = {
   type: string;
 };
 
+export type TransactionData = {
+  date: string;
+  category: string;
+  amount: number;
+  note: string;
+  type: string;
+};
+
 export type TTransactionContext = {
   transactions: Transaction[];
   setTransactions: Dispatch<SetStateAction<Transaction[]>>;
