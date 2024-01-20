@@ -1,13 +1,13 @@
 import { useContext, createContext, Dispatch, SetStateAction } from 'react';
 
-export class Transaction {
-  'amount': number;
-  'category': string;
-  'date': string;
-  'id': number;
-  'note': string;
-  'type': string;
-}
+export type Transaction = {
+  amount: number;
+  category: string;
+  date: string;
+  id: number;
+  note: string;
+  type: string;
+};
 
 export type TTransactionContext = {
   transactions: Transaction[];
