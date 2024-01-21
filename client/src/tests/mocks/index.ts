@@ -1,3 +1,6 @@
+import { createContext, useContext } from 'react';
+
+//mock single expense
 export const singleExpenseTransaction = {
   amount: 10,
   category: 'Bills',
@@ -7,6 +10,7 @@ export const singleExpenseTransaction = {
   type: 'expense',
 };
 
+//mock single income
 export const singleIncomeTransaction = {
   amount: 100,
   category: 'Freelancing',
@@ -16,6 +20,7 @@ export const singleIncomeTransaction = {
   type: 'income',
 };
 
+//mock multiple transactions
 export const multipleTransactions = [
   {
     amount: 10,
@@ -42,3 +47,9 @@ export const multipleTransactions = [
     type: 'income',
   },
 ];
+
+//mock transaction context
+const MockTransactionContext = createContext({});
+export const useMockTransactionContext = () =>
+  useContext(MockTransactionContext);
+export { MockTransactionContext };
