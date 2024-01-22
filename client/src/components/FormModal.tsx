@@ -173,10 +173,12 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   Expense
                 </FormLabel>
                 <Switch
+                  role='switch'
                   id='type'
                   colorScheme='green'
                   onChange={() => setIsExpense(!isExpense)}
                   isChecked={!isExpense}
+                  data-testid='modal-toggle-switch'
                 />
                 <FormLabel htmlFor='type' mx='3' data-testid='income-toggle'>
                   Income
@@ -213,6 +215,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   placeholder='Select category'
                   mb='6'
                   borderRadius={16}
+                  data-testid='category-options'
                 >
                   {/* Show different categories based on switch */}
                   {isExpense ? (
@@ -252,6 +255,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   name='amount'
                   mb='6'
                   borderRadius={16}
+                  data-testid='setAmount'
                 />
               </FormControl>
 
@@ -267,6 +271,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                 name='note'
                 mb='6'
                 borderRadius={16}
+                data-testid='setNote'
               />
             </ModalBody>
             <ModalFooter>
