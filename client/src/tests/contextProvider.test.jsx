@@ -24,7 +24,6 @@ function renderTestingComponent(transaction) {
 describe('<TransactionsContext.Provider />', () => {
   test('provides expected context obj to child element', () => {
     renderTestingComponent(singleExpenseTransaction);
-    console.log(singleExpenseTransaction);
     expect(renderTestingComponent).toEqual(
       <>
         <p>10</p>

@@ -40,7 +40,6 @@ import {
 const Transactions = () => {
   // Context
   const { transactions } = useTransactionContext();
-
   // States
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
@@ -112,7 +111,7 @@ const Transactions = () => {
   }
 
   return (
-    <div>
+    <div data-testid='transactions-container'>
       {/* FormModal component opens with either selected transactions or none */}
       <FormModal
         isOpen={showModal}
@@ -163,6 +162,7 @@ const Transactions = () => {
 
           {/* Add transaction button */}
           <Button
+            data-testid='transaction-button'
             onClick={() => openModal(null)}
             bg='#0902ff90'
             borderRadius={16}
