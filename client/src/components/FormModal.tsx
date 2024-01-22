@@ -169,7 +169,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
             <ModalBody>
               {/* Expense vs. Income switch */}
               <FormControl display='flex' justifyContent='center'>
-                <FormLabel htmlFor='type' mb='0'>
+                <FormLabel htmlFor='type' mb='0' data-testid='expense-toggle'>
                   Expense
                 </FormLabel>
                 <Switch
@@ -178,14 +178,16 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   onChange={() => setIsExpense(!isExpense)}
                   isChecked={!isExpense}
                 />
-                <FormLabel htmlFor='type' mx='3'>
+                <FormLabel htmlFor='type' mx='3' data-testid='income-toggle'>
                   Income
                 </FormLabel>
               </FormControl>
 
               {/* Date picker */}
               <FormControl isRequired>
-                <FormLabel htmlFor='date'>Date:</FormLabel>
+                <FormLabel htmlFor='date' data-testid='date-input'>
+                  Date:
+                </FormLabel>
                 <Input
                   type='date'
                   id='date'
@@ -194,12 +196,15 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   name='date'
                   mb='6'
                   borderRadius={16}
+                  data-testid='setDate'
                 />
               </FormControl>
 
               {/* Category Selection */}
               <FormControl isRequired>
-                <FormLabel htmlFor='category'>Category:</FormLabel>
+                <FormLabel htmlFor='category' data-testid='category-input'>
+                  Category:
+                </FormLabel>
                 <Select
                   id='category'
                   value={category}
@@ -236,7 +241,9 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
 
               {/* Amount input */}
               <FormControl isRequired>
-                <FormLabel htmlFor='amount'>Amount:</FormLabel>
+                <FormLabel htmlFor='amount' data-testid='amount-input'>
+                  Amount:
+                </FormLabel>
                 <Input
                   type='number'
                   id='amount'
@@ -249,7 +256,9 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
               </FormControl>
 
               {/* Note input */}
-              <FormLabel htmlFor='note'>Note:</FormLabel>
+              <FormLabel htmlFor='note' data-testid='note-input'>
+                Note:
+              </FormLabel>
               <Input
                 type='text'
                 id='note'
@@ -262,6 +271,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
             </ModalBody>
             <ModalFooter>
               <Button
+                data-testid='cancel-button'
                 mr={3}
                 onClick={onClose}
                 borderRadius={16}
@@ -275,6 +285,7 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                 Cancel
               </Button>
               <Button
+                data-testid='save-transaction-button'
                 type='submit'
                 bg='#0902ff90'
                 _hover={{
