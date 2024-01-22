@@ -1,8 +1,8 @@
 import { expect, it, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import FormModal from '../components/FormModal';
-import { multipleTransactions } from './mocks/index';
-import { TransactionsContext } from '../transaction';
+import FormModal from '../../components/FormModal';
+import { multipleTransactions } from '../mocks/index';
+import { TransactionsContext } from '../../transaction';
 
 //Todo: add integration testing: check that save transaction renders form input into transaction display
 
