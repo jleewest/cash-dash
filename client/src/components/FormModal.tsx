@@ -173,7 +173,6 @@ function FormModal({ isOpen, onClose, selectedTransaction }: FormModalProps) {
                   Expense
                 </FormLabel>
                 <Switch
-                  role='switch'
                   id='type'
                   colorScheme='green'
                   onChange={() => setIsExpense(!isExpense)}
