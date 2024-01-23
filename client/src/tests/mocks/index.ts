@@ -85,7 +85,7 @@ export const mocks = {
       },
       {
         amount: 2500,
-        category: 'Salary',
+        category: 'Sale',
         date: '2024-01-20',
         id: 8,
         note: 'Coding',
@@ -120,7 +120,7 @@ export const mocks = {
       },
       {
         amount: 2500,
-        category: 'Salary',
+        category: 'Sale',
         date: '2024-01-20',
         id: 8,
         note: 'Coding',
