@@ -1,5 +1,8 @@
 import { createContext, useContext } from 'react';
 
+//mock empty transactions
+export const emptyTransactions = [];
+
 //mock single expense
 export const singleExpenseTransaction = {
   amount: 10,
