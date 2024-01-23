@@ -41,7 +41,7 @@ const Dashboard = () => {
       new Date(transaction.date).getFullYear().toString() === selectedYear
   );
   return (
-    <>
+    <div data-testid='dashboard-container'>
       {/* Header: date and year selection */}
       <Flex mb={2} justifyContent='space-between' align='center'>
         {/* Date */}
@@ -140,7 +140,7 @@ const Dashboard = () => {
           <DashboardRecentTransactions />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
