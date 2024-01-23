@@ -6,10 +6,10 @@ export const mocks = {
 
   //mock single expense
   singleExpenseTransaction: {
-    amount: 10,
+    amount: 250,
     category: 'Bills',
     date: '2024-01-19',
-    id: 1,
+    id: 2,
     note: 'Housing',
     type: 'expense',
   },
@@ -23,6 +23,26 @@ export const mocks = {
     note: 'Coding',
     type: 'income',
   },
+
+  //mock transactions from different years
+  multipleYearTransactions: [
+    {
+      amount: 250,
+      category: 'Bills',
+      date: '2023-02-19',
+      id: 1,
+      note: 'Housing',
+      type: 'expense',
+    },
+    {
+      amount: 250,
+      category: 'Bills',
+      date: '2024-01-19',
+      id: 2,
+      note: 'Housing',
+      type: 'expense',
+    },
+  ],
 
   //mock multiple transactions
   multipleTransactions: {

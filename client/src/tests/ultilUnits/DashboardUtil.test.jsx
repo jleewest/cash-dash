@@ -10,6 +10,13 @@ import {
 } from '../../components/Dashboard/ChartUtil';
 
 describe('Charts should calculate and sort data as expected', () => {
+  it('should filter transactions by year', () => {
+    const transactionsByYear = mocks.multipleYearTransactions.filter(
+      (transaction) =>
+        new Date(transaction.date).getFullYear().toString() === '2024'
+    );
+    expect(transactionsByYear).toEqual([mocks.singleExpenseTransaction]);
+  });
   it('should properly group categories', () => {
     expect(groupedTransactions(mocks.multipleTransactions.data)).toEqual(
       mocks.multipleTransactions.groupedExpenses

@@ -14,7 +14,7 @@ import DoughnutChart from './Dashboard/DoughnutChart.tsx';
 import LineChart from './Dashboard/LineChart.tsx';
 import { Flex, Select } from '@chakra-ui/react';
 import DashboardRecentTransactions from './DashboardRecentTransactions.tsx';
-import { useTransactionContext } from '../transaction.tsx';
+import { Transaction, useTransactionContext } from '../transaction.tsx';
 
 Chart.defaults.responsive = true;
 Chart.defaults.plugins.title.display = true;
