@@ -7,7 +7,7 @@ import { afterEach } from 'node:test';
 
 //Todo: add integration testing: check that save transaction renders form input into transaction display
 
-describe('Modal screen renders with expected inputs', () => {
+describe('Dashboard screen renders doughnut chart with expected inputs', () => {
   beforeEach(() => {
     const setTransaction = vi.fn();
     render(
