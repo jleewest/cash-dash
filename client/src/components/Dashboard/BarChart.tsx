@@ -14,7 +14,6 @@ type BarChartProps = {
 const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   // Group transactions by month and calculate total income and expenses
   const incomeGrouped = groupByMonth(incomeTransactions(transactionsByYear));
-  //console.log(incomeGrouped);
   const expensesGrouped = groupByMonth(expenseTransactions(transactionsByYear));
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = getSortedMonths(incomeGrouped, expensesGrouped);

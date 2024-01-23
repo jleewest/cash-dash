@@ -49,17 +49,3 @@ describe('Dashboard screen renders doughnut chart with expected inputs when tran
     expect(screen.getByTestId('doughnut-chart')).toBeInTheDocument();
   });
 });
-
-describe('Doughnut chart sorts transactions as expected', () => {
-  it('should properly group categories', () => {
-    expect(groupedTransactions(mocks.multipleTransactions.data)).toEqual(
-      mocks.multipleTransactions.groupedExpenses
-    );
-  });
-
-  it('should properly sort categories', () => {
-    expect(sortedCategories(mocks.multipleTransactions.data)).toEqual(
-      mocks.multipleTransactions.sortedExpenses
-    );
-  });
-});

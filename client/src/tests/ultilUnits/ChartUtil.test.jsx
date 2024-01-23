@@ -5,9 +5,21 @@ import {
   expenseTransactions,
   groupByMonth,
   getSortedMonths,
+  groupedTransactions,
+  sortedCategories,
 } from '../../components/Dashboard/ChartUtil';
 
-describe('Charts should calculate data as expected', () => {
+describe('Charts should calculate and sort data as expected', () => {
+  it('should properly group categories', () => {
+    expect(groupedTransactions(mocks.multipleTransactions.data)).toEqual(
+      mocks.multipleTransactions.groupedExpenses
+    );
+  });
+  it('should properly sort categories', () => {
+    expect(sortedCategories(mocks.multipleTransactions.data)).toEqual(
+      mocks.multipleTransactions.sortedExpenses
+    );
+  });
   it('should filter transactions by income', () => {
     expect(incomeTransactions(mocks.multipleTransactions.data)).toEqual(
       mocks.multipleTransactions.incomeTransactions
