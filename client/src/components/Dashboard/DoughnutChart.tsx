@@ -5,11 +5,9 @@ type DoughnutChartProps = {
   transactionsByYear: Transaction[];
 };
 
-const DoughnutChart: React.FC<DoughnutChartProps> = ({
-  transactionsByYear,
-}) => {
-  // Group transactions by category and calculate total expenses
-  const groupedTransactions = transactionsByYear.reduce(
+// Group transactions by category and calculate total expenses
+export const groupedTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.reduce(
     (acc, transaction) => {
       if (transaction.type === 'expense') {
         acc[transaction.category] =
@@ -19,10 +17,15 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
     },
     {} as Record<string, number>
   );
+};
+
+const DoughnutChart: React.FC<DoughnutChartProps> = ({
+  transactionsByYear,
+}) => {
   // Sort categories by total expenses
-  const sortedCategories = Object.entries(groupedTransactions).sort(
-    (a, b) => b[1] - a[1]
-  );
+  const sortedCategories = Object.entries(
+    groupedTransactions(transactionsByYear)
+  ).sort((a, b) => b[1] - a[1]);
 
   // Get top 5 categories
   const top5Categories = sortedCategories.slice(0, 5);

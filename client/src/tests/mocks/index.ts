@@ -42,13 +42,23 @@ export const multipleTransactions = [
     type: 'income',
   },
   {
-    amount: 30,
+    amount: 400,
     category: 'Food',
     date: '2024-01-19',
     id: 3,
     note: 'Yummy',
     type: 'expense',
   },
+];
+
+export const groupedExpenses = {
+  Bills: 250,
+  Food: 400,
+};
+
+export const sortedExpenses = [
+  ['Food', 400],
+  ['Bills', 250],
 ];
 
 //mock transaction context

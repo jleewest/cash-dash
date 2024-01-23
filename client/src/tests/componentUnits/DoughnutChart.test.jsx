@@ -1,7 +1,14 @@
 import { expect, it, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
-import DoughnutChart from '../../components/Dashboard/DoughnutChart';
-import { emptyTransactions, multipleTransactions } from '../mocks/index';
+import DoughnutChart, {
+  groupedTransactions,
+} from '../../components/Dashboard/DoughnutChart';
+import {
+  emptyTransactions,
+  groupedExpenses,
+  multipleTransactions,
+  sortedExpenses,
+} from '../mocks/index';
 import { TransactionsContext } from '../../transaction';
 import { afterEach } from 'node:test';
 
@@ -53,26 +60,16 @@ describe('Doughnut chart sorts transactions as expected', () => {
     );
   });
   afterEach(cleanup);
-  it('should properly sort categories', () => {
+
+  it('should properly group categories', () => {
     console.log(multipleTransactions);
-    const transactionsByYear = multipleTransactions;
-    const groupedTransactions = transactionsByYear.reduce(
-      (acc, transaction) => {
-        if (transaction.type === 'expense') {
-          acc[transaction.category] =
-            (acc[transaction.category] || 0) + Math.abs(transaction.amount);
-        }
-        return acc;
-      }
-    );
-    const sortedCategories = Object.entries(groupedTransactions).sort(
+    expect(groupedTransactions(multipleTransactions)).toEqual(groupedExpenses);
+  });
+
+  it('should properly sort categories', () => {
+    const sortedCategories = Object.entries(groupedExpenses).sort(
       (a, b) => b[1] - a[1]
     );
-
-    //const doughnutChart = screen.getByTestId('doughnut-chart');
-    expect(sortedCategories).toEqual({
-      Bills: 250,
-      Food: 30,
-    });
+    expect(sortedCategories).toEqual(sortedExpenses);
   });
 });
