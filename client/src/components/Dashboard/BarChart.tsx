@@ -31,6 +31,7 @@ const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
 
   return (
     <Bar
+      data-testid='bar-chart'
       data={{
         labels,
         // Data
