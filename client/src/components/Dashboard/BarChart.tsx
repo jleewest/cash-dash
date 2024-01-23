@@ -12,7 +12,7 @@ export const incomeTransactions = (transactionsByYear: Transaction[]) => {
     (transaction) => transaction.type === 'income'
   );
 };
-export const expensesTransactions = (transactionsByYear: Transaction[]) => {
+export const expenseTransactions = (transactionsByYear: Transaction[]) => {
   return transactionsByYear.filter(
     (transaction) => transaction.type === 'expense'
   );
@@ -21,10 +21,8 @@ export const expensesTransactions = (transactionsByYear: Transaction[]) => {
 const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   // Group transactions by month and calculate total income and expenses
   const incomeGrouped = groupByMonth(incomeTransactions(transactionsByYear));
-  const expensesGrouped = groupByMonth(
-    expensesTransactions(transactionsByYear)
-  );
-
+  const expensesGrouped = groupByMonth(expenseTransactions(transactionsByYear));
+  //console.log(incomeGrouped);
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = getSortedMonths(incomeGrouped, expensesGrouped);
 
