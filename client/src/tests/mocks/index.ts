@@ -173,6 +173,8 @@ export const mocks = {
       1: 2600,
     },
 
+    sortedMonths: [0, 1],
+
     groupedExpenses: {
       Bills: 500,
       Food: 1000,

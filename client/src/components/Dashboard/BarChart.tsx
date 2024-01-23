@@ -25,12 +25,14 @@ const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   //console.log(incomeGrouped);
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = getSortedMonths(incomeGrouped, expensesGrouped);
+  //console.log(sortedMonths);
 
   // Create labels and data for income and expenses
   const labels = sortedMonths.map((month) =>
     new Date(2023, month).toLocaleString('default', { month: 'short' })
   );
   const incomeData = sortedMonths.map((month) => incomeGrouped[month] || 0);
+  //console.log(incomeData);
   const expensesData = sortedMonths.map((month) => expensesGrouped[month] || 0);
 
   return (

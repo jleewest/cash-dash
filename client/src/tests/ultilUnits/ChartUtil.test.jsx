@@ -30,4 +30,12 @@ describe('Charts should calculate data as expected', () => {
       groupByMonth(mocks.multipleTransactions.expenseTransactions)
     ).toEqual(mocks.multipleTransactions.monthExpenses);
   });
+  it('should sort months included in transaction history', () => {
+    expect(
+      getSortedMonths(
+        mocks.multipleTransactions.monthIncome,
+        mocks.multipleTransactions.monthExpenses
+      )
+    ).toEqual(mocks.multipleTransactions.sortedMonths);
+  });
 });
