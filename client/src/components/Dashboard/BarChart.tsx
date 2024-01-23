@@ -6,18 +6,24 @@ type BarChartProps = {
   transactionsByYear: Transaction[];
 };
 
-const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
-  // Split transactions into income and expenses
-  const incomeTransactions = transactionsByYear.filter(
+// Split transactions into income and expenses
+export const incomeTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.filter(
     (transaction) => transaction.type === 'income'
   );
-  const expensesTransactions = transactionsByYear.filter(
+};
+export const expensesTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.filter(
     (transaction) => transaction.type === 'expense'
   );
+};
 
+const BarChart: React.FC<BarChartProps> = ({ transactionsByYear }) => {
   // Group transactions by month and calculate total income and expenses
-  const incomeGrouped = groupByMonth(incomeTransactions);
-  const expensesGrouped = groupByMonth(expensesTransactions);
+  const incomeGrouped = groupByMonth(incomeTransactions(transactionsByYear));
+  const expensesGrouped = groupByMonth(
+    expensesTransactions(transactionsByYear)
+  );
 
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = getSortedMonths(incomeGrouped, expensesGrouped);
