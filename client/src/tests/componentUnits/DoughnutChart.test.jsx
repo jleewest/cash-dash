@@ -1,9 +1,6 @@
 import { expect, it, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
-import DoughnutChart, {
-  groupedTransactions,
-  sortedCategories,
-} from '../../components/Dashboard/DoughnutChart';
+import DoughnutChart from '../../components/Dashboard/DoughnutChart';
 import { mocks } from '../mocks/index';
 import { TransactionsContext } from '../../transaction';
 import { afterEach } from 'node:test';
