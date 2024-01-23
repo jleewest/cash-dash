@@ -2,6 +2,7 @@ import { expect, it, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import DoughnutChart, {
   groupedTransactions,
+  sortedCategories,
 } from '../../components/Dashboard/DoughnutChart';
 import {
   emptyTransactions,
@@ -49,27 +50,11 @@ describe('Dashboard screen renders doughnut chart with expected inputs when tran
 });
 
 describe('Doughnut chart sorts transactions as expected', () => {
-  beforeEach(() => {
-    const setTransaction = vi.fn();
-    render(
-      <TransactionsContext.Provider
-        value={{ transactions: multipleTransactions, setTransaction }}
-      >
-        <DoughnutChart transactionsByYear={multipleTransactions} />
-      </TransactionsContext.Provider>
-    );
-  });
-  afterEach(cleanup);
-
   it('should properly group categories', () => {
-    console.log(multipleTransactions);
     expect(groupedTransactions(multipleTransactions)).toEqual(groupedExpenses);
   });
 
   it('should properly sort categories', () => {
-    const sortedCategories = Object.entries(groupedExpenses).sort(
-      (a, b) => b[1] - a[1]
-    );
-    expect(sortedCategories).toEqual(sortedExpenses);
+    expect(sortedCategories(multipleTransactions)).toEqual(sortedExpenses);
   });
 });

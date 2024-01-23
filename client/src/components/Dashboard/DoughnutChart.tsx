@@ -19,16 +19,18 @@ export const groupedTransactions = (transactionsByYear: Transaction[]) => {
   );
 };
 
+// Sort categories by total expenses
+export const sortedCategories = (transactionsByYear: Transaction[]) => {
+  return Object.entries(groupedTransactions(transactionsByYear)).sort(
+    (a, b) => b[1] - a[1]
+  );
+};
+
 const DoughnutChart: React.FC<DoughnutChartProps> = ({
   transactionsByYear,
 }) => {
-  // Sort categories by total expenses
-  const sortedCategories = Object.entries(
-    groupedTransactions(transactionsByYear)
-  ).sort((a, b) => b[1] - a[1]);
-
   // Get top 5 categories
-  const top5Categories = sortedCategories.slice(0, 5);
+  const top5Categories = sortedCategories(transactionsByYear).slice(0, 5);
 
   return (
     <Doughnut
