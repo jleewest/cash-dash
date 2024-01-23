@@ -7,7 +7,27 @@ import { afterEach } from 'node:test';
 
 //Todo: add integration testing: check that save transaction renders form input into transaction display
 
-describe('Dashboard screen renders bar chart with expected inputs', () => {
+describe('Dashboard screen renders bar bar chart with expected display with zero transactions', () => {
+  beforeEach(() => {
+    const setTransaction = vi.fn();
+    render(
+      <TransactionsContext.Provider
+        value={{
+          transactions: mocks.emptyTransactions,
+          setTransaction,
+        }}
+      >
+        <BarChart transactionsByYear={mocks.emptyTransactions} />
+      </TransactionsContext.Provider>
+    );
+  });
+  afterEach(cleanup);
+  it('should render bar chart', () => {
+    expect(screen.getByTestId('bar-chart')).toBeInTheDocument();
+  });
+});
+
+describe('Dashboard screen renders bar chart with expected inputs when transactions our present', () => {
   beforeEach(() => {
     const setTransaction = vi.fn();
     render(
