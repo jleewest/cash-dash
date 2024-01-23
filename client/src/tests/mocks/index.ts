@@ -23,7 +23,7 @@ export const singleIncomeTransaction = {
 //mock multiple transactions
 export const multipleTransactions = [
   {
-    amount: 10,
+    amount: 250,
     category: 'Bills',
     date: '2024-01-19',
     id: 1,
@@ -31,7 +31,7 @@ export const multipleTransactions = [
     type: 'expense',
   },
   {
-    amount: 10,
+    amount: 1000,
     category: 'Freelancing',
     date: '2024-01-19',
     id: 2,
@@ -39,12 +39,12 @@ export const multipleTransactions = [
     type: 'income',
   },
   {
-    amount: 12,
+    amount: 30,
     category: 'Food',
     date: '2024-01-19',
     id: 3,
     note: 'Yummy',
-    type: 'income',
+    type: 'expense',
   },
 ];
 

@@ -34,7 +34,6 @@ const Dashboard = () => {
   const { transactions } = useTransactionContext();
   // State
   const [selectedYear, setSelectedYear] = useState('2024');
-  console.log(transactions);
   // Filter transactions by year to pass to charts
   const transactionsByYear = transactions.filter(
     (transaction) =>

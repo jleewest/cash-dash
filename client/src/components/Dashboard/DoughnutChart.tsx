@@ -19,7 +19,6 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
     },
     {} as Record<string, number>
   );
-
   // Sort categories by total expenses
   const sortedCategories = Object.entries(groupedTransactions).sort(
     (a, b) => b[1] - a[1]
@@ -30,6 +29,7 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
 
   return (
     <Doughnut
+      data-testid='doughnut-chart'
       data={{
         // Labels
         labels: top5Categories.map((transaction) => transaction[0]),
