@@ -27,3 +27,15 @@ export const getSortedMonths = (
   ];
   return individualMonths.sort((a, b) => a - b);
 };
+
+// Split transactions into income and expenses
+export const incomeTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.filter(
+    (transaction) => transaction.type === 'income'
+  );
+};
+export const expenseTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.filter(
+    (transaction) => transaction.type === 'expense'
+  );
+};

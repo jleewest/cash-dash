@@ -3,8 +3,6 @@ import { mocks } from '../mocks/index';
 import {
   incomeTransactions,
   expenseTransactions,
-} from '../../components/Dashboard/BarChart';
-import {
   groupByMonth,
   getSortedMonths,
 } from '../../components/Dashboard/ChartUtil';
