@@ -1,7 +1,7 @@
 import { expect, it, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FormModal from '../../components/FormModal';
-import { multipleTransactions } from '../mocks/index';
+import { mocks } from '../mocks/index';
 import { TransactionsContext } from '../../transaction';
 
 //Todo: add integration testing: check that save transaction renders form input into transaction display
@@ -11,7 +11,10 @@ describe('Modal screen renders with expected inputs', () => {
     const setTransaction = vi.fn();
     render(
       <TransactionsContext.Provider
-        value={{ transactions: multipleTransactions, setTransaction }}
+        value={{
+          transactions: mocks.multipleTransactions.data,
+          setTransaction,
+        }}
       >
         <FormModal isOpen={true} onClose={vi.fn()} selectedTransaction={null} />
       </TransactionsContext.Provider>
@@ -48,7 +51,10 @@ describe('Modal screen inputs render expected response', () => {
     const setTransaction = vi.fn();
     render(
       <TransactionsContext.Provider
-        value={{ transactions: multipleTransactions, setTransaction }}
+        value={{
+          transactions: mocks.multipleTransactions.data,
+          setTransaction,
+        }}
       >
         <FormModal
           isOpen={true}

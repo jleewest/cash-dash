@@ -4,12 +4,7 @@ import DoughnutChart, {
   groupedTransactions,
   sortedCategories,
 } from '../../components/Dashboard/DoughnutChart';
-import {
-  emptyTransactions,
-  groupedExpenses,
-  multipleTransactions,
-  sortedExpenses,
-} from '../mocks/index';
+import { mocks } from '../mocks/index';
 import { TransactionsContext } from '../../transaction';
 import { afterEach } from 'node:test';
 
@@ -20,9 +15,12 @@ describe('Dashboard screen renders doughnut chart expected display with zero tra
     const setTransaction = vi.fn();
     render(
       <TransactionsContext.Provider
-        value={{ transactions: multipleTransactions, setTransaction }}
+        value={{
+          transactions: mocks.multipleTransactions.data,
+          setTransaction,
+        }}
       >
-        <DoughnutChart transactionsByYear={emptyTransactions} />
+        <DoughnutChart transactionsByYear={mocks.emptyTransactions} />
       </TransactionsContext.Provider>
     );
   });
@@ -37,9 +35,12 @@ describe('Dashboard screen renders doughnut chart with expected inputs when tran
     const setTransaction = vi.fn();
     render(
       <TransactionsContext.Provider
-        value={{ transactions: multipleTransactions, setTransaction }}
+        value={{
+          transactions: mocks.multipleTransactions.data,
+          setTransaction,
+        }}
       >
-        <DoughnutChart transactionsByYear={multipleTransactions} />
+        <DoughnutChart transactionsByYear={mocks.multipleTransactions.data} />
       </TransactionsContext.Provider>
     );
   });
@@ -51,10 +52,14 @@ describe('Dashboard screen renders doughnut chart with expected inputs when tran
 
 describe('Doughnut chart sorts transactions as expected', () => {
   it('should properly group categories', () => {
-    expect(groupedTransactions(multipleTransactions)).toEqual(groupedExpenses);
+    expect(groupedTransactions(mocks.multipleTransactions.data)).toEqual(
+      mocks.multipleTransactions.groupedExpenses
+    );
   });
 
   it('should properly sort categories', () => {
-    expect(sortedCategories(multipleTransactions)).toEqual(sortedExpenses);
+    expect(sortedCategories(mocks.multipleTransactions.data)).toEqual(
+      mocks.multipleTransactions.sortedExpenses
+    );
   });
 });

@@ -1,7 +1,7 @@
 import { expect, it, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 import BarChart from '../../components/Dashboard/BarChart';
-import { multipleTransactions } from '../mocks/index';
+import { mocks } from '../mocks/index';
 import { TransactionsContext } from '../../transaction';
 import { afterEach } from 'node:test';
 
@@ -12,9 +12,12 @@ describe('Dashboard screen renders bar chart with expected inputs', () => {
     const setTransaction = vi.fn();
     render(
       <TransactionsContext.Provider
-        value={{ transactions: multipleTransactions, setTransaction }}
+        value={{
+          transactions: mocks.multipleTransactions.data,
+          setTransaction,
+        }}
       >
-        <BarChart transactionsByYear={multipleTransactions} />
+        <BarChart transactionsByYear={mocks.multipleTransactions.data} />
       </TransactionsContext.Provider>
     );
   });
