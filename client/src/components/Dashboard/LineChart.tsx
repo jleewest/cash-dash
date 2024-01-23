@@ -33,6 +33,7 @@ const LineChart: React.FC<LineChartProps> = ({ transactionsByYear }) => {
 
   return (
     <Line
+      data-testid='line-chart'
       data={{
         labels,
         // Data
