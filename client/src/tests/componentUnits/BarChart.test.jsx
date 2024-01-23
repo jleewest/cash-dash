@@ -27,7 +27,7 @@ describe('Dashboard screen renders bar bar chart with expected display with zero
   });
 });
 
-describe('Dashboard screen renders bar chart with expected inputs when transactions our present', () => {
+describe('Dashboard screen renders bar chart with expected inputs when transactions are present', () => {
   beforeEach(() => {
     const setTransaction = vi.fn();
     render(
