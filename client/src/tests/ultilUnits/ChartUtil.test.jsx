@@ -36,4 +36,16 @@ describe('Charts should calculate data as expected', () => {
       )
     ).toEqual(mocks.multipleTransactions.sortedMonths);
   });
+  it('should return array of income per month', () => {
+    const incomeData = mocks.multipleTransactions.sortedMonths.map(
+      (month) => mocks.multipleTransactions.monthIncome[month] || 0
+    );
+    expect(incomeData).toEqual(mocks.multipleTransactions.incomeDataByMonth);
+  });
+  it('should return array of expenses per month', () => {
+    const expenseData = mocks.multipleTransactions.sortedMonths.map(
+      (month) => mocks.multipleTransactions.monthExpenses[month] || 0
+    );
+    expect(expenseData).toEqual(mocks.multipleTransactions.expenseDataByMonth);
+  });
 });

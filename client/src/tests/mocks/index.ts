@@ -175,6 +175,10 @@ export const mocks = {
 
     sortedMonths: [0, 1],
 
+    expenseDataByMonth: [650, 850],
+
+    incomeDataByMonth: [3500, 2600],
+
     groupedExpenses: {
       Bills: 500,
       Food: 1000,
