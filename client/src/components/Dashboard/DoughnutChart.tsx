@@ -1,6 +1,7 @@
 import { Doughnut } from 'react-chartjs-2';
 import { Transaction } from '../../transaction';
 import { sortedCategories } from './ChartUtil';
+import { useMemo } from 'react';
 
 type DoughnutChartProps = {
   transactionsByYear: Transaction[];
@@ -10,7 +11,10 @@ const DoughnutChart: React.FC<DoughnutChartProps> = ({
   transactionsByYear,
 }) => {
   // Get top 5 categories
-  const top5Categories = sortedCategories(transactionsByYear).slice(0, 5);
+  const top5Categories = useMemo(
+    () => sortedCategories(transactionsByYear).slice(0, 5),
+    [transactionsByYear]
+  );
 
   return (
     <Doughnut

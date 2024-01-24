@@ -85,15 +85,6 @@ describe('Dashboard screen renders with expected outputs', () => {
       screen.getByText(mocks.multipleTransactions.totalExpenses)
     ).toBeInTheDocument();
   });
-  it('Should render expected categories', () => {
-    //expect(screen.getByTestId('category-input')).toBeInTheDocument();
-  });
-  it('Should render income and expenses for all months', () => {
-    //expect(screen.getByTestId('amount-input')).toBeInTheDocument();
-  });
-  it('Should render graph of all months', () => {
-    //expect(screen.getByTestId('note-input')).toBeInTheDocument();
-  });
   it('Should render list of recent transactions', () => {
     expect(screen.getAllByText('Freelancing')[0]).toBeInTheDocument();
   });

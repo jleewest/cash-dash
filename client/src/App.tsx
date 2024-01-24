@@ -14,26 +14,35 @@ function App() {
 
   // Fetch transactions from server
   useEffect(() => {
-    const fetchTransactions = async () => {
+    const fetchTransactions = async (): Promise<void> => {
       try {
         const data = await getTransactions();
         const sortedTransactions: Transaction[] = data
-          .map((transaction: Transaction) => ({
+          .map((transaction) => ({
             ...transaction,
             // DB stores amount in cents
             amount: transaction.amount / 100,
           }))
           // Sort transactions by date
-          .sort((a: Record<string, string>, b: Record<string, string>) => {
-            new Date(b.date).getTime() - new Date(a.date).getTime();
+          .sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
           });
-        setTransactions(sortedTransactions);
+        setTransactions((prevTransactions) => {
+          if (
+            JSON.stringify(prevTransactions) !==
+            JSON.stringify(sortedTransactions)
+          ) {
+            return sortedTransactions;
+          }
+          return prevTransactions;
+        });
       } catch (error) {
         console.log(error);
       }
     };
     fetchTransactions();
-  }, [transactions]); // Causes infinite loop, remove dependency, but then transactions don't update when modyfing them
+  }, []);
+
   return (
     <Router>
       <div className='app'>
