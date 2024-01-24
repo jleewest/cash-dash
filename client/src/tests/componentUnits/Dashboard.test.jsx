@@ -71,7 +71,9 @@ describe('Dashboard screen renders with expected outputs', () => {
     expect(screen.getByText(today)).toBeInTheDocument();
   });
   it('Should render expected net balance', () => {
-    //expect(screen.getByTestId('income-toggle')).toBeInTheDocument();
+    expect(
+      screen.getByText(mocks.multipleTransactions.totalBalance)
+    ).toBeInTheDocument();
   });
   it('Should render expected total income', () => {
     expect(
