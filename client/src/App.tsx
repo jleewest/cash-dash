@@ -27,13 +27,22 @@ function App() {
           .sort((a: Record<string, string>, b: Record<string, string>) => {
             new Date(b.date).getTime() - new Date(a.date).getTime();
           });
-        setTransactions(sortedTransactions);
+        setTransactions((prevTransactions) => {
+          if (
+            JSON.stringify(prevTransactions) !==
+            JSON.stringify(sortedTransactions)
+          ) {
+            return sortedTransactions;
+          }
+          return prevTransactions;
+        });
       } catch (error) {
         console.log(error);
       }
     };
     fetchTransactions();
-  }, [transactions]); // Causes infinite loop, remove dependency, but then transactions don't update when modyfing them
+  }, []);
+
   return (
     <Router>
       <div className='app'>
