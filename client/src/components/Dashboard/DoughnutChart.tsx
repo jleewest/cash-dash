@@ -1,5 +1,6 @@
 import { Doughnut } from 'react-chartjs-2';
 import { Transaction } from '../../transaction';
+import { sortedCategories } from './ChartUtil';
 
 type DoughnutChartProps = {
   transactionsByYear: Transaction[];
@@ -8,28 +9,12 @@ type DoughnutChartProps = {
 const DoughnutChart: React.FC<DoughnutChartProps> = ({
   transactionsByYear,
 }) => {
-  // Group transactions by category and calculate total expenses
-  const groupedTransactions = transactionsByYear.reduce(
-    (acc, transaction) => {
-      if (transaction.type === 'expense') {
-        acc[transaction.category] =
-          (acc[transaction.category] || 0) + Math.abs(transaction.amount);
-      }
-      return acc;
-    },
-    {} as Record<string, number>
-  );
-
-  // Sort categories by total expenses
-  const sortedCategories = Object.entries(groupedTransactions).sort(
-    (a, b) => b[1] - a[1]
-  );
-
   // Get top 5 categories
-  const top5Categories = sortedCategories.slice(0, 5);
+  const top5Categories = sortedCategories(transactionsByYear).slice(0, 5);
 
   return (
     <Doughnut
+      data-testid='doughnut-chart'
       data={{
         // Labels
         labels: top5Categories.map((transaction) => transaction[0]),

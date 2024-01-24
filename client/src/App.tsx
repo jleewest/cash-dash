@@ -41,7 +41,7 @@ function App() {
           <Header />
           <NavBar />
         </div>
-        <div className='main'>
+        <div className='main' role='main'>
           <TransactionsContext.Provider
             value={{ transactions, setTransactions }}
           >

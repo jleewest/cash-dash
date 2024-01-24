@@ -1,5 +1,10 @@
 import { Line } from 'react-chartjs-2';
-import { groupByMonth, getSortedMonths } from './ChartUtil';
+import {
+  groupByMonth,
+  getSortedMonths,
+  incomeTransactions,
+  expenseTransactions,
+} from './ChartUtil';
 import { Transaction } from '../../transaction';
 
 type LineChartProps = {
@@ -7,17 +12,9 @@ type LineChartProps = {
 };
 
 const LineChart: React.FC<LineChartProps> = ({ transactionsByYear }) => {
-  // Split transactions into income and expenses
-  const incomeTransactions = transactionsByYear.filter(
-    (transaction: Transaction) => transaction.type === 'income'
-  );
-  const expensesTransactions = transactionsByYear.filter(
-    (transaction: Transaction) => transaction.type === 'expense'
-  );
-
   // Group transactions by month and calculate total income and expenses
-  const incomeGrouped = groupByMonth(incomeTransactions);
-  const expensesGrouped = groupByMonth(expensesTransactions);
+  const incomeGrouped = groupByMonth(incomeTransactions(transactionsByYear));
+  const expensesGrouped = groupByMonth(expenseTransactions(transactionsByYear));
 
   // Get all unique months from income and expenses transactions, and sort them
   const sortedMonths = getSortedMonths(incomeGrouped, expensesGrouped);
@@ -33,6 +30,7 @@ const LineChart: React.FC<LineChartProps> = ({ transactionsByYear }) => {
 
   return (
     <Line
+      data-testid='line-chart'
       data={{
         labels,
         // Data

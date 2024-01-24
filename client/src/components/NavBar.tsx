@@ -15,13 +15,17 @@ const NavBar = () => {
         <nav>
           <ul>
             <li>
-              <Link to={`/`} className='link'>
+              <Link to={`/`} className='link' data-testid='navbar-dashboard'>
                 <FontAwesomeIcon icon={faHouse} className='icon' />
                 Dashboard
               </Link>
             </li>
             <li>
-              <Link to={`/transactions`} className='link'>
+              <Link
+                to={`/transactions`}
+                className='link'
+                data-testid='navbar-transactions'
+              >
                 <FontAwesomeIcon icon={faTableList} className='icon' />
                 Transactions
               </Link>
@@ -29,7 +33,7 @@ const NavBar = () => {
           </ul>
         </nav>
         {/* User details */}
-        <div className='user'>
+        <div className='user' data-testid='user'>
           <Avatar
             name='John Doe'
             src={user}
@@ -40,7 +44,7 @@ const NavBar = () => {
             <h3>John Doe</h3>
             <p>john.doe@cashdash.com</p>
           </div>
-          <div className='signout'>
+          <div className='signout' data-testid='signout'>
             <FontAwesomeIcon icon={faArrowRightFromBracket} className='icon' />
             Sign out
           </div>
