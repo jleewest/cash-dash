@@ -40,6 +40,21 @@ const Dashboard = () => {
     (transaction) =>
       new Date(transaction.date).getFullYear().toString() === selectedYear
   );
+
+  const totalIncome = transactionsByYear
+    .filter((transaction) => transaction.type === 'income')
+    .reduce((acc, transaction) => acc + transaction.amount, 0)
+    .toFixed(2);
+
+  const totalExpenses = transactionsByYear
+    .filter((transaction) => transaction.type === 'expense')
+    .reduce((acc, transaction) => acc + transaction.amount, 0)
+    .toFixed(2);
+
+  const totalBalance = (totalIncome: number, totalExpenses: number) => {
+    return (totalIncome - totalExpenses).toFixed(2);
+  };
+
   return (
     <div data-testid='dashboard-container'>
       {/* Header: date and year selection */}
@@ -81,10 +96,7 @@ const Dashboard = () => {
         <Stat className='stat'>
           <StatLabel>Total Balance</StatLabel>
           <StatNumber>
-            {transactionsByYear
-              .reduce((acc, transaction) => acc + transaction.amount, 0)
-              .toFixed(2)}
-            €
+            {totalBalance(Number(totalIncome), Number(totalExpenses))}€
           </StatNumber>
           <StatHelpText>
             <StatArrow type='increase' />
@@ -95,14 +107,7 @@ const Dashboard = () => {
         <Stat className='stat'>
           {/* Total income card */}
           <StatLabel>Total Income</StatLabel>
-          <StatNumber>
-            {transactionsByYear
-              //@ts-ignore
-              .filter((transaction) => transaction.type === 'income')
-              //@ts-ignore
-              .reduce((acc, transaction) => acc + transaction.amount, 0)
-              .toFixed(2)}
-          </StatNumber>
+          <StatNumber>{totalIncome}</StatNumber>
           <StatHelpText>
             <StatArrow type='decrease' />
             9.05%
@@ -112,14 +117,7 @@ const Dashboard = () => {
         <Stat className='stat'>
           {/* Total expenses card */}
           <StatLabel>Total Expenses</StatLabel>
-          <StatNumber>
-            {transactionsByYear
-              //@ts-ignore
-              .filter((transaction) => transaction.type === 'expense')
-              //@ts-ignore
-              .reduce((acc, transaction) => acc + transaction.amount, 0)
-              .toFixed(2)}
-          </StatNumber>
+          <StatNumber>{totalExpenses}</StatNumber>
           <StatHelpText>
             <StatArrow type='increase' />
             5.87%
