@@ -1,15 +1,17 @@
-import { TransactionData } from './transaction';
+import { TransactionData, Transaction } from './transaction';
 
 const BASE_URL = 'http://localhost:3000/transactions';
 
-export async function getTransactions() {
-  try {
-    const response = await fetch(`${BASE_URL}`);
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    console.log(e);
+async function apiClient(): Promise<Transaction[]> {
+  const response = await fetch(`${BASE_URL}`);
+  if (response.ok) {
+    return response.json() as Promise<Transaction[]>;
   }
+  return Promise.reject(new Error('Something went wrong'));
+}
+
+export function getTransactions(): Promise<Transaction[]> {
+  return apiClient();
 }
 
 export async function postTransaction(transactionData: TransactionData) {
