@@ -3,12 +3,14 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import router from './router'
 
-const app: Application = express();
+export const app: Application = express();
 
 app.use(cors()).use(express.json()).use(router);
 
-const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
+  const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port http://localhost:${PORT}...`);
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server listening on port http://localhost:${PORT}...`);
 });
+}
