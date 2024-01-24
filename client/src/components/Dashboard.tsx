@@ -14,7 +14,7 @@ import DoughnutChart from './Dashboard/DoughnutChart.tsx';
 import LineChart from './Dashboard/LineChart.tsx';
 import { Flex, Select } from '@chakra-ui/react';
 import DashboardRecentTransactions from './DashboardRecentTransactions.tsx';
-import { Transaction, useTransactionContext } from '../transaction.tsx';
+import { useTransactionContext } from '../transaction.tsx';
 
 Chart.defaults.responsive = true;
 Chart.defaults.plugins.title.display = true;
@@ -22,6 +22,7 @@ Chart.defaults.plugins.title.display = true;
 Chart.defaults.plugins.title.font.size = 20;
 Chart.defaults.plugins.title.color = 'black';
 
+// TODO: logic for total balance to deduct expenses
 // Todo: logic for when there are no transactions
 // Todo: make Stats as external component
 // Todo: StatHelpText has no logic yet
@@ -59,6 +60,7 @@ const Dashboard = () => {
         </Text>
         {/* Year selection */}
         <Select
+          data-testid='set-year-button'
           defaultValue='2024'
           w={90}
           onChange={(e) => setSelectedYear(e.target.value)}
@@ -80,7 +82,6 @@ const Dashboard = () => {
           <StatLabel>Total Balance</StatLabel>
           <StatNumber>
             {transactionsByYear
-              //@ts-ignore
               .reduce((acc, transaction) => acc + transaction.amount, 0)
               .toFixed(2)}
             €
