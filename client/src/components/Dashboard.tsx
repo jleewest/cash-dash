@@ -22,6 +22,7 @@ Chart.defaults.plugins.title.display = true;
 Chart.defaults.plugins.title.font.size = 20;
 Chart.defaults.plugins.title.color = 'black';
 
+// TODO: logic for total balance to deduct expenses
 // Todo: logic for when there are no transactions
 // Todo: make Stats as external component
 // Todo: StatHelpText has no logic yet
@@ -34,14 +35,28 @@ const Dashboard = () => {
   const { transactions } = useTransactionContext();
   // State
   const [selectedYear, setSelectedYear] = useState('2024');
-
   // Filter transactions by year to pass to charts
   const transactionsByYear = transactions.filter(
     (transaction) =>
       new Date(transaction.date).getFullYear().toString() === selectedYear
   );
+
+  const totalIncome = transactionsByYear
+    .filter((transaction) => transaction.type === 'income')
+    .reduce((acc, transaction) => acc + transaction.amount, 0)
+    .toFixed(2);
+
+  const totalExpenses = transactionsByYear
+    .filter((transaction) => transaction.type === 'expense')
+    .reduce((acc, transaction) => acc + transaction.amount, 0)
+    .toFixed(2);
+
+  const totalBalance = (totalIncome: number, totalExpenses: number) => {
+    return (totalIncome - totalExpenses).toFixed(2);
+  };
+
   return (
-    <>
+    <div data-testid='dashboard-container'>
       {/* Header: date and year selection */}
       <Flex mb={2} justifyContent='space-between' align='center'>
         {/* Date */}
@@ -60,6 +75,7 @@ const Dashboard = () => {
         </Text>
         {/* Year selection */}
         <Select
+          data-testid='set-year-button'
           defaultValue='2024'
           w={90}
           onChange={(e) => setSelectedYear(e.target.value)}
@@ -80,11 +96,7 @@ const Dashboard = () => {
         <Stat className='stat'>
           <StatLabel>Total Balance</StatLabel>
           <StatNumber>
-            {transactionsByYear
-              //@ts-ignore
-              .reduce((acc, transaction) => acc + transaction.amount, 0)
-              .toFixed(2)}
-            €
+            {totalBalance(Number(totalIncome), Number(totalExpenses))}€
           </StatNumber>
           <StatHelpText>
             <StatArrow type='increase' />
@@ -95,14 +107,7 @@ const Dashboard = () => {
         <Stat className='stat'>
           {/* Total income card */}
           <StatLabel>Total Income</StatLabel>
-          <StatNumber>
-            {transactionsByYear
-              //@ts-ignore
-              .filter((transaction) => transaction.type === 'income')
-              //@ts-ignore
-              .reduce((acc, transaction) => acc + transaction.amount, 0)
-              .toFixed(2)}
-          </StatNumber>
+          <StatNumber>{totalIncome}</StatNumber>
           <StatHelpText>
             <StatArrow type='decrease' />
             9.05%
@@ -112,14 +117,7 @@ const Dashboard = () => {
         <Stat className='stat'>
           {/* Total expenses card */}
           <StatLabel>Total Expenses</StatLabel>
-          <StatNumber>
-            {transactionsByYear
-              //@ts-ignore
-              .filter((transaction) => transaction.type === 'expense')
-              //@ts-ignore
-              .reduce((acc, transaction) => acc + transaction.amount, 0)
-              .toFixed(2)}
-          </StatNumber>
+          <StatNumber>{totalExpenses}</StatNumber>
           <StatHelpText>
             <StatArrow type='increase' />
             5.87%
@@ -140,7 +138,7 @@ const Dashboard = () => {
           <DashboardRecentTransactions />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

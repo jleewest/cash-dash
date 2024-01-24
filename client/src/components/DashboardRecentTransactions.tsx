@@ -18,7 +18,7 @@ const DashboardRecentTransactions = () => {
   const { transactions } = useTransactionContext();
 
   return (
-    <TableContainer>
+    <TableContainer data-testid='dashboard-recent-transactions'>
       <Table variant='striped' colorScheme='gray' size='sm'>
         <caption>Recent Transactions</caption>
         <Thead>

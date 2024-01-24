@@ -34,7 +34,6 @@ function App() {
     };
     fetchTransactions();
   }, [transactions]); // Causes infinite loop, remove dependency, but then transactions don't update when modyfing them
-
   return (
     <Router>
       <div className='app'>
@@ -42,7 +41,7 @@ function App() {
           <Header />
           <NavBar />
         </div>
-        <div className='main'>
+        <div className='main' role='main'>
           <TransactionsContext.Provider
             value={{ transactions, setTransactions }}
           >

@@ -27,3 +27,36 @@ export const getSortedMonths = (
   ];
   return individualMonths.sort((a, b) => a - b);
 };
+
+// Split transactions into income and expenses
+export const incomeTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.filter(
+    (transaction) => transaction.type === 'income'
+  );
+};
+export const expenseTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.filter(
+    (transaction) => transaction.type === 'expense'
+  );
+};
+
+// Group transactions by category and calculate total expenses
+export const groupedTransactions = (transactionsByYear: Transaction[]) => {
+  return transactionsByYear.reduce(
+    (acc, transaction) => {
+      if (transaction.type === 'expense') {
+        acc[transaction.category] =
+          (acc[transaction.category] || 0) + Math.abs(transaction.amount);
+      }
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+};
+
+// Sort categories by total expenses
+export const sortedCategories = (transactionsByYear: Transaction[]) => {
+  return Object.entries(groupedTransactions(transactionsByYear)).sort(
+    (a, b) => b[1] - a[1]
+  );
+};

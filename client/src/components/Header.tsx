@@ -8,10 +8,22 @@ const Header = () => {
     <header>
       {/* Logo */}
       <div>
-        <img src={logo} alt='logo' width={160} className='logo' />
+        <img
+          src={logo}
+          alt='logo'
+          width={160}
+          className='logo'
+          data-testid='logo'
+        />
       </div>
       {/* App name */}
-      <Heading as='h1' lineHeight='tall' mt={2} size='xl'>
+      <Heading
+        as='h1'
+        lineHeight='tall'
+        mt={2}
+        size='xl'
+        data-testid='app-name'
+      >
         <Highlight
           query='Cash'
           styles={{
