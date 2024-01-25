@@ -7,12 +7,12 @@ jest.mock('../models/transaction');
 
 // Function to create a mock instance of Transaction
 const createMockTransaction = (data: Partial<Transaction>) => {
-  return {
+  return ({
     ...data,
     save: jest.fn().mockResolvedValue(data),
     update: jest.fn().mockResolvedValue(data),
     destroy: jest.fn().mockResolvedValue(1),
-  } as unknown as Transaction;
+  } as unknown) as Transaction;
 };
 
 const mockedTransaction = Transaction as jest.Mocked<typeof Transaction>;
@@ -26,10 +26,16 @@ describe('Transaction Controller', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    mockedTransaction.findAll.mockResolvedValue([createMockTransaction({ id: 1, amount: 100 })]);
-    mockedTransaction.create.mockResolvedValue(createMockTransaction({ id: 2 }));
-    mockedTransaction.findByPk.mockImplementation(id =>
-      id === 1 ? Promise.resolve(createMockTransaction({ id, amount: 100 })) : Promise.resolve(null)
+    mockedTransaction.findAll.mockResolvedValue([
+      createMockTransaction({ id: 1, amount: 100 }),
+    ]);
+    mockedTransaction.create.mockResolvedValue(
+      createMockTransaction({ id: 2 })
+    );
+    mockedTransaction.findByPk.mockImplementation((id) =>
+      id === 1
+        ? Promise.resolve(createMockTransaction({ id, amount: 100 }))
+        : Promise.resolve(null)
     );
   });
 
@@ -64,11 +70,13 @@ describe('Transaction Controller', () => {
   test('DELETE /transactions/:id should delete a transaction', async () => {
     const transactionId = 1;
 
-    const response = await request(app)
-      .delete(`/transactions/${transactionId}`);
+    const response = await request(app).delete(
+      `/transactions/${transactionId}`
+    );
 
     expect(response.statusCode).toBe(204);
-    expect(mockedTransaction.destroy).toHaveBeenCalledWith({ where: { id: transactionId } });
+    expect(mockedTransaction.destroy).toHaveBeenCalledWith({
+      where: { id: transactionId },
+    });
   });
-
 });
